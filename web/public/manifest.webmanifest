@@ -1,0 +1,16 @@
+{
+  "name": "Mi Paraíso · Estimulación temprana",
+  "short_name": "Mi Paraíso",
+  "description": "Estimulación temprana, nido y talleres para niños de 1 a 2 años en Imperial, Cañete.",
+  "lang": "es-PE",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff6e6",
+  "theme_color": "#fff6e6",
+  "icons": [
+    { "src": "/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

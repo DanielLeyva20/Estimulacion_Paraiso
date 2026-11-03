@@ -1,0 +1,54 @@
+@let tema = espacio().tema;
+
+<div class="relative">
+  <div
+    class="surcos absolute inset-0 rounded-parcela transition-[rotate] duration-700 ease-suave"
+    [ngClass]="[tema.fondo, invertido() ? 'rotate-[2.5deg]' : '-rotate-[2.5deg]']"
+    aria-hidden="true"></div>
+
+  <div class="relative grid gap-surco rounded-parcela bg-blanco p-surco shadow-sombra">
+    <figure class="relative aspect-4/3 overflow-hidden rounded-parcela-sm bg-crema-2">
+      @for (foto of espacio().fotos; track foto.src; let i = $index) {
+        @let elegida = activa() === i;
+        <img
+          class="absolute inset-0 size-full object-cover transition-[opacity,scale] duration-700 ease-suave"
+          [class]="elegida ? 'scale-100 opacity-100' : 'scale-[1.04] opacity-0'"
+          [appAdaptable]="foto.src"
+          sizes="(min-width: 64rem) 680px, 92vw"
+          [alt]="elegida ? foto.alt : ''"
+          [attr.aria-hidden]="!elegida"
+          [width]="foto.ancho"
+          [height]="foto.alto"
+          loading="lazy"
+          decoding="async" />
+      }
+      <span
+        class="absolute right-3.5 bottom-3.5 rounded-full bg-tinta/70 px-2.5 py-1 text-sm font-semibold text-white tabular-nums backdrop-blur-sm"
+        aria-hidden="true">
+        {{ activa() + 1 }} / {{ espacio().fotos.length }}
+      </span>
+    </figure>
+
+    <div class="grid grid-cols-3 gap-surco" role="group" [attr.aria-label]="'Fotos de ' + espacio().nombre">
+      @for (foto of espacio().fotos; track foto.src; let i = $index) {
+        <button
+          type="button"
+          class="aspect-4/3 cursor-pointer overflow-hidden rounded-parcela-sm transition-[box-shadow,scale,opacity] duration-200 ease-suave hover:opacity-100 active:scale-[0.97] aria-pressed:ring-3 aria-pressed:ring-offset-2 aria-pressed:ring-offset-blanco"
+          [ngClass]="[tema.anillo, activa() === i ? 'opacity-100' : 'opacity-70']"
+          [attr.aria-pressed]="activa() === i"
+          [attr.aria-label]="'Ver foto: ' + foto.alt"
+          (click)="elegir(i)">
+          <img
+            class="size-full object-cover"
+            [appAdaptable]="foto.src"
+            sizes="(min-width: 64rem) 220px, 30vw"
+            alt=""
+            [width]="foto.ancho"
+            [height]="foto.alto"
+            loading="lazy"
+            decoding="async" />
+        </button>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/espacios/espacios.component.html"
+        ],
+        "createdAt": "2026-10-29T18:10:14.046Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/programas/programas.component.html"
+        ],
+        "createdAt": "2026-10-29T18:10:14.304Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/galeria/galeria.component.html"
+        ],
+        "createdAt": "2026-10-29T19:05:00.000Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/talleres/coordinacion/coordinacion.component.html"
+        ],
+        "createdAt": "2026-10-30T12:00:00.000Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/espacios/visor/visor.component.html"
+        ],
+        "createdAt": "2026-10-30T13:00:00.000Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/talleres/talleres.component.html"
+        ],
+        "createdAt": "2026-10-30T14:00:00.000Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/nosotros/nosotros.component.html"
+        ],
+        "createdAt": "2026-10-30T15:00:00.000Z",
+        "reason": "agent: Angular [src] binding to real files in public/img; detector reads it as empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "web/src/app/secciones/confianza/confianza.component.html",
+          "web/src/app/secciones/preguntas/preguntas.component.html"
+        ],
+        "createdAt": "2026-11-03T00:40:00.000Z",
+        "reason": "agent: appAdaptable directive sets src/srcset to real files in public/img at runtime; detector reads the static attribute as empty src"
+      }
+    ]
+  }
+}

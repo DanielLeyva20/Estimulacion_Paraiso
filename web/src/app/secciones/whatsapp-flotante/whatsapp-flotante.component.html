@@ -1,0 +1,14 @@
+<a
+  class="pointer-events-none fixed right-[clamp(16px,2.4vw,32px)] bottom-[clamp(16px,2.4vw,32px)] z-40 inline-flex h-15 w-15 translate-y-6 scale-90 items-center justify-center gap-2.5 rounded-full bg-wa font-semibold text-white opacity-0 shadow-flotante transition duration-600 ease-suave hover:bg-wa-hover data-[visible=true]:pointer-events-auto data-[visible=true]:translate-y-0 data-[visible=true]:scale-100 data-[visible=true]:opacity-100 sm:w-auto sm:pr-[22px] sm:pl-[18px]"
+  [href]="whatsapp"
+  target="_blank"
+  rel="noopener"
+  aria-label="Escríbenos por WhatsApp"
+  [attr.data-visible]="visible()"
+  [attr.tabindex]="visible() ? null : -1">
+  <span class="absolute inset-0 animate-onda rounded-[inherit]" aria-hidden="true"></span>
+  <span class="relative inline-flex [--icono-tamano:26px]">
+    <app-icono nombre="whatsapp" />
+  </span>
+  <span class="relative max-sm:hidden">¿Hablamos?</span>
+</a>

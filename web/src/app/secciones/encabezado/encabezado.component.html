@@ -1,0 +1,116 @@
+<!-- Sobre el video de la portada el encabezado es transparente con texto blanco; al bajar toma fondo crema. -->
+<header
+  class="fixed inset-x-0 top-0 z-50 text-white transition-[background-color,box-shadow,color] duration-300 data-[con-fondo=true]:bg-crema/90 data-[con-fondo=true]:text-tinta data-[con-fondo=true]:shadow-[0_1px_0_rgb(19_34_43/0.08)] data-[con-fondo=true]:backdrop-blur-[14px] data-[con-fondo=true]:backdrop-saturate-150"
+  [attr.data-con-fondo]="desplazado() || menuAbierto()">
+  <div class="contenedor flex min-h-17 items-center gap-3 xl:min-h-19 xl:gap-6">
+    <a href="#inicio" class="inline-flex rounded-xl" aria-label="Mi Paraíso, ir al inicio" (click)="cerrarMenu()">
+      <app-logo />
+    </a>
+
+    <!-- Escritorio: enlaces en línea; el de la sección actual queda subrayado. -->
+    <nav aria-label="Secciones" class="ml-auto hidden gap-[clamp(12px,1.4vw,26px)] text-[0.98rem] xl:flex">
+      @for (enlace of enlaces; track enlace.id) {
+        @let actual = seccionActual() === enlace.id;
+        <a
+          class="relative px-0.5 py-2 opacity-85 transition-opacity duration-200 after:absolute after:inset-x-0 after:bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-xs after:bg-coral after:transition-transform after:duration-300 after:ease-suave hover:opacity-100 hover:after:scale-x-100"
+          [class.opacity-100]="actual"
+          [class.after:scale-x-100]="actual"
+          [href]="'#' + enlace.id"
+          [attr.aria-current]="actual ? 'location' : null">
+          {{ enlace.texto }}
+        </a>
+      }
+    </nav>
+
+    <div class="ml-auto flex items-center gap-2 xl:ml-0">
+      <a
+        class="boton size-11 min-h-0 p-0 xl:size-auto xl:min-h-11 xl:px-4.5 xl:py-2.5 xl:text-[0.98rem]"
+        [href]="whatsapp"
+        target="_blank"
+        rel="noopener">
+        <app-icono nombre="whatsapp" />
+        <span class="sr-only xl:not-sr-only">Escríbenos</span>
+      </a>
+
+      <button
+        type="button"
+        class="boton-menu"
+        aria-controls="menu-principal"
+        [attr.aria-expanded]="menuAbierto()"
+        (click)="alternarMenu()">
+        <span class="hamburguesa" [class.abierta]="menuAbierto()" aria-hidden="true"><span></span><span></span></span>
+        <span class="sr-only">{{ menuAbierto() ? 'Cerrar menú' : 'Abrir menú' }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!--
+  Menú: <dialog> modal sobre toda la página. En escritorio es un panel turquesa que entra desde la
+  derecha (el resto de la página queda atenuada detrás); en el celular ocupa la pantalla y se abre
+  en círculo desde el botón. Un clic fuera del panel, Escape o cualquier enlace lo cierran.
+-->
+<dialog
+  #menu
+  id="menu-principal"
+  class="menu"
+  aria-label="Menú de secciones"
+  (close)="alCerrarMenu()"
+  (click)="alHacerClicEnMenu($event)">
+  <div class="menu-panel">
+    <app-siluetas-fondo [siluetas]="siluetasMenu" />
+
+    <div class="menu-cabecera">
+      <a href="#inicio" class="rounded-xl" aria-label="Mi Paraíso, ir al inicio" (click)="cerrarMenu()">
+        <app-logo />
+      </a>
+      <button type="button" class="menu-cerrar" aria-label="Cerrar menú" (click)="cerrarMenu()">
+        <app-icono nombre="cerrar" />
+      </button>
+    </div>
+
+    <p class="menu-saludo">
+      ¿A dónde vamos hoy?
+      <app-garabato class="-top-4 -right-9 w-8 rotate-12 text-mostaza" forma="rayitos" />
+    </p>
+
+    <nav aria-label="Secciones" class="menu-enlaces">
+      @for (enlace of enlaces; track enlace.id; let i = $index) {
+        @let actual = seccionActual() === enlace.id;
+        <a
+          class="enlace-menu"
+          [class.actual]="actual"
+          [style.--orden]="i"
+          [href]="'#' + enlace.id"
+          [attr.aria-current]="actual ? 'location' : null"
+          (click)="cerrarMenu()">
+          <span class="enlace-icono" [ngClass]="enlace.color"><app-icono [nombre]="enlace.icono" /></span>
+          <span class="enlace-texto">{{ enlace.texto }}</span>
+          @if (actual) {
+            <span class="enlace-aqui">Estás aquí</span>
+          } @else {
+            <span class="enlace-flecha"><app-icono nombre="flecha" /></span>
+          }
+        </a>
+      }
+    </nav>
+
+    <div class="menu-pie" [style.--orden]="enlaces.length">
+      <a class="boton w-full" [href]="whatsapp" target="_blank" rel="noopener" (click)="cerrarMenu()">
+        <app-icono nombre="whatsapp" /> Escríbenos por WhatsApp
+      </a>
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <p class="flex items-center gap-1.5 text-sm text-white/85 [--icono-tamano:16px]">
+          <app-icono nombre="ubicacion" /> {{ ubicacion }}
+        </p>
+        <app-redes-sociales fondo="claro" />
+      </div>
+    </div>
+
+    <!-- Colinas de pasto al pie del panel, como en la pantalla de carga y el pie de página. -->
+    <svg class="menu-colinas" viewBox="0 0 440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path class="colina-lejana" d="M0 44C70 20 140 22 210 40s150 22 230-6V90H0Z" />
+      <path class="colina-cercana" d="M0 66c80-20 160-16 240 2s140 12 200-4V90H0Z" />
+    </svg>
+  </div>
+</dialog>

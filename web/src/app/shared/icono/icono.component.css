@@ -1,0 +1,9 @@
+:host {
+  display: contents;
+}
+
+svg {
+  width: var(--icono-tamano, 1.25em);
+  height: var(--icono-tamano, 1.25em);
+  flex: none;
+}

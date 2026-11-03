@@ -1,0 +1,55 @@
+<section id="ubicacion" class="seccion" aria-labelledby="titulo-ubicacion">
+  <app-divisor class="text-crema" forma="ola" />
+
+  <div class="contenedor grid items-center gap-[clamp(32px,5vw,72px)] lg:grid-cols-12">
+    <div class="grid justify-items-start gap-7 lg:col-span-4">
+      <header class="encabezado-seccion mb-0" data-acequia="ubicacion">
+        <h2 id="titulo-ubicacion" appRevelar>Cómo <span class="con-subrayado text-turquesa-oscuro">llegar<app-garabato class="subrayado-titulo text-coral" forma="subrayado" /></span></h2>
+        <p appRevelar="100">Estamos en {{ ubicacion }}. Ven con tu hijo a conocer el local; te esperamos.</p>
+      </header>
+
+      <dl class="grid w-full gap-4 border-y-2 border-tinta/10 py-5" appRevelar="160">
+        <div class="flex items-start gap-3">
+          <dt class="grid size-10 flex-none place-items-center rounded-full bg-coral text-tinta [--icono-tamano:20px]">
+            <app-icono nombre="ubicacion" />
+            <span class="sr-only">Dirección</span>
+          </dt>
+          <dd>
+            <span class="block font-semibold">{{ referencia }}</span>
+            <span class="text-[0.95rem] text-tinta-suave">{{ ubicacion }} · Lima, Perú</span>
+          </dd>
+        </div>
+        <div class="flex items-start gap-3">
+          <dt class="grid size-10 flex-none place-items-center rounded-full bg-mostaza text-tinta [--icono-tamano:20px]">
+            <app-icono nombre="mensaje" />
+            <span class="sr-only">Ubicación exacta</span>
+          </dt>
+          <dd class="text-[0.95rem] text-tinta-suave">Escríbenos y te enviamos la ubicación exacta por WhatsApp.</dd>
+        </div>
+      </dl>
+
+      <div class="flex w-full flex-wrap gap-3" appRevelar="220">
+        <a class="boton w-full sm:w-auto" [href]="whatsapp" target="_blank" rel="noopener">
+          <app-icono nombre="whatsapp" /> Pedir la ubicación
+        </a>
+        <a class="boton boton-suave w-full sm:w-auto" [href]="comoLlegar" target="_blank" rel="noopener">
+          <app-icono nombre="ruta" /> Cómo llegar
+        </a>
+      </div>
+    </div>
+
+    <!-- isolate: contiene los z-index internos de Leaflet para que no tapen el encabezado. -->
+    <div
+      class="relative isolate h-[clamp(320px,46vw,540px)] overflow-hidden rounded-campo bg-crema-2 shadow-tarjeta lg:col-span-8"
+      appRevelar="120">
+      @if (!mapaListo()) {
+        <p class="absolute inset-0 grid place-items-center text-tinta-suave" aria-hidden="true">Cargando mapa…</p>
+      }
+      <div
+        #mapa
+        class="mapa size-full"
+        role="region"
+        aria-label="Mapa con la ubicación de Mi Paraíso en Imperial, Cañete"></div>
+    </div>
+  </div>
+</section>

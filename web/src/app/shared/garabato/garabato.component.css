@@ -1,0 +1,107 @@
+/*
+ * Siempre flota con posición absoluta dentro de un contenedor `relative` (quien lo usa pone top/left con
+ * Tailwind). Sin `display`: la posición absoluta ya lo vuelve bloque y así no le gana a max-md:hidden.
+ */
+:host {
+  position: absolute;
+  pointer-events: none;
+}
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+/* El subrayado se estira al ancho y alto que le dé quien lo usa. */
+:host([data-forma='subrayado']) svg {
+  height: 100%;
+}
+
+/*
+ * Las animaciones usan `transform` (y no `rotate`/`scale`) para sumarse al giro que quien lo
+ * usa le da con Tailwind (rotate-12), en vez de reemplazarlo.
+ */
+
+/* Rayitos: laten como si algo brillara junto a ellos. */
+:host([data-forma='rayitos']) svg {
+  transform-origin: 0 100%;
+  animation: latir 2.4s ease-in-out infinite;
+}
+
+/* Estrellas y corazones de contorno: titilan, cada uno con su desfase (--desfase). */
+:host([data-forma='estrella-contorno']) svg,
+:host([data-forma='corazon-contorno']) svg {
+  animation: titilar 4s ease-in-out infinite;
+  animation-delay: var(--desfase, 0s);
+}
+
+/* Estrella sonriente: se balancea contenta. */
+:host([data-forma='estrella-sonriente']) svg {
+  transform-origin: 50% 80%;
+  animation: balancear 3.2s ease-in-out infinite;
+}
+.sticker {
+  filter: drop-shadow(0 6px 8px rgb(19 34 43 / 0.22));
+}
+.sticker-cuerpo {
+  fill: color-mix(in srgb, var(--color-mostaza) 82%, var(--color-blanco));
+  stroke: var(--color-blanco);
+}
+.sticker-cara {
+  stroke: var(--color-tinta);
+}
+.sticker-mejilla {
+  fill: var(--color-coral);
+  opacity: 0.55;
+}
+
+/* Subrayado: se dibuja de izquierda a derecha cuando su contenedor se revela (.visible). */
+.trazo {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.5s;
+}
+:host-context(.visible) .trazo {
+  stroke-dashoffset: 0;
+}
+
+@keyframes latir {
+  0%,
+  100% {
+    transform: scale(0.88);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes titilar {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(0.82) rotate(14deg);
+  }
+}
+
+@keyframes balancear {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  svg {
+    animation: none !important;
+  }
+  .trazo {
+    transition: none;
+  }
+}

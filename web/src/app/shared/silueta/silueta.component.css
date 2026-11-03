@@ -1,0 +1,36 @@
+/*
+ * La figura deambula en un recorrido suave (--deambular-x / --deambular-y marcan cuánto se aleja).
+ * Se anima `transform`, así la rotación base de cada figura (utilidad rotate-*, que usa `rotate`) se suma.
+ * Sin `display` aquí: la posición absoluta ya la vuelve bloque y así no le gana a utilidades como max-md:hidden.
+ */
+:host {
+  animation: deambular var(--deambular-duracion, 16s) ease-in-out var(--deambular-retraso, 0s) infinite;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes deambular {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(var(--deambular-x, 24px), calc(var(--deambular-y, 28px) * -1)) rotate(8deg);
+  }
+  50% {
+    transform: translate(calc(var(--deambular-x, 24px) * -0.5), calc(var(--deambular-y, 28px) * -1.5)) rotate(-6deg);
+  }
+  75% {
+    transform: translate(calc(var(--deambular-x, 24px) * -1), calc(var(--deambular-y, 28px) * -0.4)) rotate(4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host {
+    animation: none;
+  }
+}

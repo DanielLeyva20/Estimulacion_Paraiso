@@ -1,0 +1,136 @@
+<section id="talleres" class="seccion" aria-labelledby="titulo-talleres">
+  <app-divisor class="text-crema" forma="curva" />
+  <app-fondo-dibujado class="text-coral/60" [curva]="true" [garabatos]="garabatos" />
+  <app-siluetas-fondo [siluetas]="siluetas" />
+
+  <div class="contenedor relative grid gap-[clamp(56px,7vw,96px)]">
+    <!-- En escritorio el título y la bajada van lado a lado. -->
+    <header
+      class="grid items-end gap-x-[clamp(32px,5vw,80px)] gap-y-5 lg:grid-cols-2"
+      data-acequia="talleres">
+      <h2 id="titulo-talleres" appRevelar>
+        Talleres <span class="resalte-recortado text-coral">personalizados</span>, a la medida de tu hijo
+      </h2>
+      <p class="max-w-xl text-[1.125em] text-tinta-suave" appRevelar="100">
+        ¿Quieres reforzar algo en especial o que viva una experiencia nueva? Diseñamos talleres según su edad, lo que le
+        gusta y lo que necesita: individuales, en grupo pequeño o junto a mamá o papá.
+      </p>
+    </header>
+
+    <div class="grid items-start gap-[clamp(32px,4vw,56px)] lg:grid-cols-12">
+      <!--
+        Armador: tarjeta con costura, como una ficha de tela. Cada tema y cada modalidad tienen su color;
+        lo elegido se llena de ese color y se refleja al instante en la vista previa.
+      -->
+      <div class="armador lg:col-span-7" appRevelar="120">
+        <app-garabato class="-top-6 -right-3 w-12 rotate-12 text-mostaza" forma="rayitos" />
+        <h3 class="text-[1.6rem]">Arma su <span class="resalte-recortado text-coral">taller</span></h3>
+
+        <fieldset class="grid gap-4">
+          <legend class="paso-armador">
+            <span class="paso-numero" [class.listo]="temasEnOrden().length > 0">
+              @if (temasEnOrden().length > 0) {
+                <app-icono nombre="check" />
+              } @else {
+                1
+              }
+            </span>
+            <span>
+              ¿Qué le gustaría vivir?
+              <span class="block text-[0.92rem] font-normal text-tinta-suave">Elige uno o varios.</span>
+            </span>
+            @if (temasEnOrden().length > 0) {
+              <span class="paso-contador">{{ temasEnOrden().length }} {{ temasEnOrden().length === 1 ? 'elegido' : 'elegidos' }}</span>
+            }
+          </legend>
+          <div class="flex flex-wrap gap-2.5">
+            @for (tema of temas; track tema.id) {
+              <button
+                type="button"
+                class="tema-armador"
+                [attr.data-tono]="tema.tono"
+                [attr.aria-pressed]="estaElegido(tema.id)"
+                (click)="alternarTema(tema.id)">
+                <span class="tema-icono"><app-icono [nombre]="tema.icono" /></span>
+                {{ tema.nombre }}
+                <span class="tema-check"><app-icono nombre="check" /></span>
+              </button>
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="grid gap-4">
+          <legend class="paso-armador">
+            <span class="paso-numero paso-numero-2">2</span>
+            ¿Cómo lo prefieres?
+          </legend>
+          <div class="grid gap-3 sm:grid-cols-3">
+            @for (opcion of modalidades; track opcion.id) {
+              <label class="modalidad-armador" [attr.data-tono]="opcion.tono">
+                <input
+                  class="sr-only"
+                  type="radio"
+                  name="modalidad-taller"
+                  [value]="opcion.id"
+                  [checked]="modalidad() === opcion.id"
+                  (change)="elegirModalidad(opcion.id)" />
+                <span class="modalidad-marca" aria-hidden="true"></span>
+                <span class="modalidad-icono"><app-icono [nombre]="opcion.icono" /></span>
+                <span class="leading-tight font-bold">{{ opcion.nombre }}</span>
+                <span class="text-sm leading-[1.35] text-tinta-suave">{{ opcion.detalle }}</span>
+              </label>
+            }
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Vista previa: foto del último tema elegido, resumen y botón de consulta. -->
+      <aside class="lg:sticky lg:top-28 lg:col-span-5" aria-labelledby="titulo-vista-taller" appRevelar="200">
+        <div class="lamina [--lamina-giro:1.5deg]">
+          <div class="relative aspect-4/3 overflow-hidden rounded-[22px] bg-crema-2">
+            @for (foto of [fotoVista()]; track foto.src) {
+              <img
+                class="foto-vista absolute inset-0 size-full object-cover"
+                [appAdaptable]="foto.src"
+                sizes="(min-width: 64rem) 460px, 92vw"
+                [alt]="foto.alt"
+                [width]="foto.ancho"
+                [height]="foto.alto"
+                loading="lazy"
+                decoding="async" />
+            }
+            @if (temasEnOrden().length) {
+              <ul class="absolute inset-x-3 bottom-3 flex flex-wrap gap-1.5" aria-hidden="true">
+                @for (tema of temasEnOrden(); track tema.id) {
+                  <li class="etiqueta etiqueta-tema [--icono-tamano:15px]">
+                    <app-icono [nombre]="tema.icono" /> {{ tema.nombre }}
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+
+          <div class="grid gap-4 px-2 pt-5 pb-2 sm:px-3">
+            <h3 id="titulo-vista-taller" class="text-[1.35rem]">Tu taller</h3>
+            <p class="min-h-[3.2em] text-tinta-suave" aria-live="polite">
+              @if (resumen()) {
+                <strong class="font-semibold text-tinta">{{ resumen() }}</strong>
+              } @else {
+                Elige al menos un tema y te armamos la propuesta.
+              }
+            </p>
+            <p class="flex items-center gap-2.5 rounded-parcela-sm bg-crema px-3.5 py-2.5 text-[0.95rem]">
+              <span class="[--icono-tamano:20px]"><app-icono nombre="grupo" /></span>
+              <span><strong class="font-semibold">{{ nombreModalidad() }}</strong> · {{ detalleModalidad() }}</span>
+            </p>
+            <a class="boton w-full" [href]="enlaceWhatsapp()" target="_blank" rel="noopener">
+              <app-icono nombre="whatsapp" /> Consultar este taller
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <app-coordinacion [pasos]="pasos" />
+  </div>
+</section>

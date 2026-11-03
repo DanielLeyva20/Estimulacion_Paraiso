@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es-PE" class="cargando">
+<head>
+  <meta charset="utf-8">
+  <title>Estimulación temprana en Imperial, Cañete | Mi Paraíso</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estimulación temprana, nido, talleres y vacaciones útiles para niños de 1 a 2 años en Imperial, Cañete. Grupos pequeños y padres bienvenidos. Escríbenos por WhatsApp.">
+  <meta name="theme-color" content="#fff6e6">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="geo.region" content="PE-LIM">
+  <meta name="geo.placename" content="Imperial, Cañete">
+  <meta name="geo.position" content="-13.0610454;-76.352939">
+  <meta name="ICBM" content="-13.0610454, -76.352939">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, Facebook, Instagram). La imagen y la URL absolutas
+       las agrega scripts/preparar-produccion.mjs según sitio.config.json. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mi Paraíso">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:title" content="Mi Paraíso · Estimulación temprana en Imperial, Cañete">
+  <meta property="og:description" content="Un pequeño paraíso para crecer: estimulación temprana, nido y talleres para niños de 1 a 2 años.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sala de juego de Mi Paraíso con mesitas y cocinitas de juguete">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="seo-generado">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <!-- El logo es lo primero que se ve (en la pantalla de carga); el póster del video, lo primero al terminar. -->
+  <link
+    rel="preload"
+    as="image"
+    href="img/logo-castillo-mediano.webp"
+    imagesrcset="img/logo-castillo-mediano.webp 520w, img/logo-castillo-grande.webp 960w"
+    imagesizes="(max-width: 40rem) 78vw, 500px"
+    fetchpriority="high">
+  <link rel="preload" as="image" href="img/portada-video.webp">
+</head>
+<body>
+  <!--
+    Pantalla de carga: un paisaje de cuento con el castillo del logo. Cuando la página está lista, sus
+    puertas se abren y la vista entra por ellas hasta mostrar la web. Estilos en src/styles/pantalla-carga.css;
+    la secuencia la dirige ocultarPantallaDeCarga() (src/app/core/pantalla-carga.ts).
+  -->
+  <div id="pantalla-carga" class="carga" role="status" aria-live="polite">
+    <div class="carga-cielo" aria-hidden="true">
+      <span class="carga-sol"></span>
+      <svg class="carga-nube carga-nube-1" viewBox="0 0 120 56"><path d="M24 54a20 20 0 0 1-2-40 26 26 0 0 1 48-6 20 20 0 0 1 30 18 15 15 0 0 1-2 28Z" /></svg>
+      <svg class="carga-nube carga-nube-2" viewBox="0 0 120 56"><path d="M24 54a20 20 0 0 1-2-40 26 26 0 0 1 48-6 20 20 0 0 1 30 18 15 15 0 0 1-2 28Z" /></svg>
+      <svg class="carga-nube carga-nube-3" viewBox="0 0 120 56"><path d="M24 54a20 20 0 0 1-2-40 26 26 0 0 1 48-6 20 20 0 0 1 30 18 15 15 0 0 1-2 28Z" /></svg>
+    </div>
+
+    <div class="carga-campo" aria-hidden="true">
+      <svg class="carga-colinas" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path class="colina-lejana" d="M0 150C200 96 380 104 560 146s380 54 560-8 260-40 320-20V320H0Z" />
+        <path class="colina-media" d="M0 214c180-40 360-30 520 0s340 50 540 0 280-40 380-20V320H0Z" />
+        <path class="colina-cercana" d="M0 268c220-30 420-20 640 6s420 24 620-6 140-14 180-6V320H0Z" />
+      </svg>
+      <svg class="carga-arbol carga-arbol-1" viewBox="0 0 60 80"><path class="arbol-tronco" d="M27 80V44h6v36Z" /><circle class="arbol-copa" cx="30" cy="30" r="24" /><circle class="arbol-brillo" cx="22" cy="22" r="9" /></svg>
+      <svg class="carga-arbol carga-arbol-2" viewBox="0 0 60 80"><path class="arbol-tronco" d="M27 80V44h6v36Z" /><circle class="arbol-copa" cx="30" cy="30" r="24" /><circle class="arbol-brillo" cx="22" cy="22" r="9" /></svg>
+      <svg class="carga-arbol carga-arbol-3" viewBox="0 0 60 80"><path class="arbol-tronco" d="M27 80V44h6v36Z" /><circle class="arbol-copa" cx="30" cy="30" r="24" /><circle class="arbol-brillo" cx="22" cy="22" r="9" /></svg>
+    </div>
+
+    <div class="carga-destellos" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <svg class="carga-mariposa carga-mariposa-1" viewBox="0 0 40 30" aria-hidden="true">
+      <path class="ala ala-izquierda" d="M20 15C14 2 2 2 3 11s11 9 17 4Zm0 0c-5 3-12 6-9 12s9-4 9-12Z" />
+      <path class="ala ala-derecha" d="M20 15c6-13 18-13 17-4s-11 9-17 4Zm0 0c5 3 12 6 9 12s-9-4-9-12Z" />
+    </svg>
+    <svg class="carga-mariposa carga-mariposa-2" viewBox="0 0 40 30" aria-hidden="true">
+      <path class="ala ala-izquierda" d="M20 15C14 2 2 2 3 11s11 9 17 4Zm0 0c-5 3-12 6-9 12s9-4 9-12Z" />
+      <path class="ala ala-derecha" d="M20 15c6-13 18-13 17-4s-11 9-17 4Zm0 0c5 3 12 6 9 12s-9-4-9-12Z" />
+    </svg>
+
+    <!-- El castillo del logo; encima, las dos hojas de su puerta y la luz que hay detrás. -->
+    <div class="carga-castillo" aria-hidden="true">
+      <img
+        class="carga-logo"
+        src="img/logo-castillo-mediano.webp"
+        srcset="img/logo-castillo-mediano.webp 520w, img/logo-castillo-grande.webp 960w"
+        sizes="(max-width: 40rem) 78vw, 500px"
+        width="960"
+        height="689"
+        alt=""
+        fetchpriority="high">
+      <span class="puerta-brillo"></span>
+      <span class="carga-puerta">
+        <span class="puerta-luz"></span>
+        <span class="puerta-hoja puerta-hoja-izquierda"></span>
+        <span class="puerta-hoja puerta-hoja-derecha"></span>
+      </span>
+    </div>
+
+    <p class="carga-nombre marca"><span class="marca-mi">Mi</span><span class="marca-paraiso">Paraíso</span></p>
+
+    <p class="carga-texto">
+      Abriendo las puertas del castillo<span class="carga-puntos" aria-hidden="true"><span></span><span></span><span></span></span>
+    </p>
+
+    <span class="carga-luz" aria-hidden="true"></span>
+  </div>
+
+  <app-root class="block"></app-root>
+
+  <!-- Sin JavaScript (o para buscadores que no lo ejecutan): lo esencial del centro y cómo contactarlo. -->
+  <noscript>
+    <main class="sin-js">
+      <h1>Mi Paraíso · Estimulación temprana en Imperial, Cañete</h1>
+      <p>Centro de estimulación temprana, nido y talleres para niños de 1 a 2 años en Imperial, Cañete (Lima, Perú). Grupos pequeños, espacios pensados para ellos y padres bienvenidos.</p>
+      <ul>
+        <li>Estimulación temprana de 1 a 2 años</li>
+        <li>Nido y talleres</li>
+        <li>Vacaciones útiles en enero y febrero</li>
+        <li>Talleres personalizados</li>
+      </ul>
+      <p>Dirigido por la profesora Yesenia Matos Sánchez, directora del colegio Mi Pequeño Paraíso.</p>
+      <p><a href="https://wa.me/51974987291">Escríbenos por WhatsApp: 974 987 291</a></p>
+    </main>
+  </noscript>
+</body>
+</html>

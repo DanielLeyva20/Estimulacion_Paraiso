@@ -1,0 +1,14 @@
+<svg
+  #svg
+  class="absolute inset-0 size-full overflow-visible fill-none [stroke-linecap:round] [stroke-linejoin:round]">
+  <defs>
+    <mask id="acequia-regada" maskUnits="userSpaceOnUse" x="-50" y="-50" width="10000" height="100000">
+      <path #mascara class="stroke-white stroke-12 transition-[stroke-dashoffset] duration-700 ease-suave" />
+    </mask>
+  </defs>
+
+  <path #cauce class="stroke-agua/20 stroke-7" />
+  <path #agua class="stroke-agua stroke-3 transition-[stroke-dashoffset] duration-700 ease-suave" />
+  <path #brillo class="animate-brillo stroke-white/85 stroke-[1.5] [stroke-dasharray:2_22]" mask="url(#acequia-regada)" />
+  <g #nodos></g>
+</svg>

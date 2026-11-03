@@ -1,0 +1,27 @@
+<!-- Todas las formas comparten un lienzo de 1440 × 100 que se estira al ancho de la pantalla. -->
+<svg viewBox="0 0 1440 100" preserveAspectRatio="none" fill="currentColor">
+  @switch (forma()) {
+    @case ('ola') {
+      <path d="M0 62C240 104 480 18 720 48s480 34 720 6V100H0Z" />
+    }
+    @case ('olas') {
+      <!-- La ola de atrás mide el doble y se desliza en bucle: su forma se repite cada 1440 unidades. -->
+      <path
+        class="ola-fondo"
+        opacity="0.45"
+        d="M0 46C360 96 1080 -4 1440 46S2520 -4 2880 46V100H0Z" />
+      <path d="M0 70C300 30 560 96 860 64s420-40 580-14V100H0Z" />
+    }
+    @case ('curva') {
+      <path d="M0 100V58Q720 -26 1440 58V100Z" />
+    }
+    @case ('festones') {
+      <path
+        d="M0 100V64a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0a60 46 0 0 1 120 0V100Z" />
+    }
+    @case ('colinas') {
+      <path opacity="0.5" d="M0 100V58C220 8 420 8 640 50s400 30 560-8c90-22 170-22 240-8V100Z" />
+      <path d="M0 100V74C260 40 520 46 760 70s460 18 680-16V100Z" />
+    }
+  }
+</svg>

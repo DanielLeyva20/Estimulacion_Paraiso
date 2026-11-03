@@ -1,0 +1,45 @@
+<h3 class="mb-2 text-[1.35rem]" appRevelar>Así lo coordinamos</h3>
+
+<div #zona class="relative">
+  <ol class="lista" (pointerleave)="ocultar()">
+    @for (paso of pasos(); track paso.titulo; let i = $index) {
+      <li
+        class="paso"
+        [class.activo]="activo() === i"
+        [appRevelar]="i * retrasoPorPasoMs"
+        (pointerenter)="mostrar(i, $event)">
+        <span class="numero" aria-hidden="true">{{ i + 1 }}</span>
+        <h4 class="text-[1.1rem]">{{ paso.titulo }}</h4>
+        <p class="text-[0.98rem] text-tinta-suave">{{ paso.texto }}</p>
+        <span class="miniatura">
+          <img
+            [appAdaptable]="paso.foto.src"
+            sizes="76px"
+            [alt]="paso.foto.alt"
+            [width]="paso.foto.ancho"
+            [height]="paso.foto.alto"
+            loading="lazy"
+            decoding="async" />
+        </span>
+      </li>
+    }
+  </ol>
+
+  <!-- Foto flotante (solo con mouse). Las tres se apilan y se funden entre sí al cambiar de paso. -->
+  <figure #vista class="vista" [class.visible]="activo() !== null" aria-hidden="true">
+    <div class="vista-lamina">
+      @for (paso of pasos(); track paso.titulo; let i = $index) {
+        <img
+          class="vista-foto"
+          [class.activa]="activo() === i"
+          [appAdaptable]="paso.foto.src"
+          sizes="250px"
+          alt=""
+          [width]="paso.foto.ancho"
+          [height]="paso.foto.alto"
+          loading="lazy"
+          decoding="async" />
+      }
+    </div>
+  </figure>
+</div>

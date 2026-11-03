@@ -1,0 +1,386 @@
+/* Sello circular con la temporada, pegado sobre el collage. */
+.sello-temporada {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 4px;
+  width: clamp(112px, 15vw, 150px);
+  aspect-ratio: 1;
+  padding: 12px;
+  border-radius: 999px;
+  background-color: var(--color-turquesa);
+  color: var(--color-tinta);
+  text-align: center;
+  rotate: -8deg;
+  box-shadow:
+    inset 0 0 0 6px var(--color-turquesa),
+    inset 0 0 0 8px rgb(19 34 43 / 0.35),
+    var(--shadow-tarjeta);
+}
+
+/*
+ * Ruta: en escritorio las paradas van en fila sobre un camino ondulado; en móvil, en columna
+ * con el camino como una línea punteada a la izquierda.
+ */
+.ruta {
+  position: relative;
+  display: grid;
+  gap: 28px;
+}
+.ruta::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  bottom: 32px;
+  left: 41px;
+  border-left: 3px dashed rgb(19 34 43 / 0.28);
+}
+
+.ruta-camino {
+  display: none;
+}
+
+.parada-ruta {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 18px;
+  row-gap: 4px;
+  align-items: start;
+}
+.parada-ruta p {
+  grid-column: 2;
+}
+
+/*
+ * Nube de cada parada: una base redondeada y dos "copos" (pseudo-elementos) que heredan el color
+ * de la actividad. La sombra va con drop-shadow para que siga el contorno de la nube, y cada una
+ * flota a su propio ritmo gracias al desfase por `--orden`.
+ */
+.parada-nube {
+  --ancho: 84px;
+  --alto: 62px;
+  position: relative;
+  grid-row: span 2;
+  width: var(--ancho);
+  height: var(--alto);
+  filter: drop-shadow(0 5px 0 rgb(19 34 43 / 0.14)) drop-shadow(0 12px 14px rgb(19 34 43 / 0.12));
+  animation: flotar-nube 3.6s ease-in-out infinite;
+  animation-delay: calc(var(--orden, 0) * -0.7s);
+}
+
+.nube-icono {
+  --icono-tamano: 28px;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  height: 62%;
+  border-radius: 999px;
+  transition:
+    scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.nube-icono::before,
+.nube-icono::after {
+  content: '';
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: inherit;
+}
+.nube-icono::before {
+  left: 14%;
+  bottom: 32%;
+  width: 54%;
+}
+.nube-icono::after {
+  right: 12%;
+  bottom: 38%;
+  width: 38%;
+}
+/* El ícono va encima de los copos y sube un poco para quedar al centro de toda la nube. */
+.nube-icono-simbolo {
+  position: relative;
+  display: grid;
+  z-index: 1;
+  translate: 0 calc(var(--alto) * -0.15);
+}
+
+@keyframes flotar-nube {
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@media (min-width: 64rem) {
+  .ruta {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .ruta::before {
+    display: none;
+  }
+  .ruta-camino {
+    position: absolute;
+    top: 26px;
+    left: 10%;
+    display: block;
+    width: 80%;
+    height: 60px;
+    overflow: visible;
+    fill: none;
+    stroke: rgb(19 34 43 / 0.3);
+    stroke-width: 3;
+    stroke-dasharray: 12 12;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    animation: var(--animate-brillo);
+    animation-duration: 3.2s;
+  }
+  .parada-ruta {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    row-gap: 8px;
+  }
+  .parada-ruta p {
+    grid-column: 1;
+    max-width: 22ch;
+  }
+  .parada-nube {
+    --ancho: 132px;
+    --alto: 96px;
+    grid-row: auto;
+    margin-bottom: 8px;
+  }
+  .nube-icono {
+    --icono-tamano: 36px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .parada-ruta:hover .nube-icono {
+    scale: 1.1;
+    rotate: -5deg;
+  }
+}
+
+/* ---------- Calendario de verano ---------- */
+
+/* Tarjeta blanca apenas girada, con los anillos de espiral de un calendario de pared arriba. */
+.calendario {
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 34rem;
+  gap: 14px;
+  padding: 30px 16px 16px;
+  border-radius: 24px;
+  background-color: var(--color-blanco);
+  box-shadow: var(--shadow-tarjeta);
+  rotate: -1deg;
+}
+.calendario::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  inset-inline: 22px;
+  height: 12px;
+  background: radial-gradient(circle, transparent 3px, var(--color-tinta) 3.5px 5px, transparent 5.5px) 0 0 / 30px 12px
+    repeat-x;
+  opacity: 0.55;
+}
+
+.calendario-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.calendario-sol {
+  --icono-tamano: 18px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: var(--color-mostaza);
+  animation: girar 14s linear infinite;
+}
+
+.meses {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+@media (min-width: 40rem) {
+  .meses {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+.mes {
+  position: relative;
+  display: grid;
+  height: 48px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: var(--color-crema);
+  color: rgb(19 34 43 / 0.6);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+/* Enero y febrero: cielo arriba y mar abajo. */
+.mes-verano {
+  background-color: var(--color-cielo);
+  color: var(--color-tinta);
+  font-weight: 700;
+}
+.mes-nombre {
+  position: relative;
+  z-index: 1;
+}
+
+/* El mar sube desde abajo cuando el calendario aparece (.visible), cada mes con su retraso. */
+.mar {
+  position: absolute;
+  inset: 0;
+  translate: 0 100%;
+  transition: translate 0.9s var(--ease-suave) var(--retraso-mes, 0ms);
+}
+.visible .mar {
+  translate: 0 0;
+}
+
+/*
+ * Olas: una franja del doble de ancho recortada con forma de ola que se desplaza en bucle infinito.
+ * La máscara se repite cada 25%, así al llegar a -50% el dibujo coincide y el salto no se nota. Dos
+ * capas a distinta velocidad y en sentidos opuestos dan sensación de mar.
+ */
+.ola {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24' preserveAspectRatio='none'%3E%3Cpath d='M0 8Q30 0 60 8T120 8V24H0Z'/%3E%3C/svg%3E")
+    0 0 / 25% 100% repeat-x;
+}
+.ola-fondo {
+  height: 80%;
+  background-color: color-mix(in srgb, var(--color-turquesa) 50%, var(--color-cielo));
+  animation: oleaje-inverso 3.6s linear infinite;
+}
+.ola-frente {
+  height: 62%;
+  background-color: var(--color-turquesa);
+  animation: oleaje 2.4s linear infinite;
+}
+
+@keyframes oleaje {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-25%, 2px);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+@keyframes oleaje-inverso {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes girar {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ---------- Datos de la temporada ---------- */
+
+/* Ficha blanca con borde superior de su tono e ícono en burbuja del mismo color. */
+.dato-verano {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 14px 14px 14px 68px;
+  border-top: 4px solid var(--tono);
+  border-radius: 18px;
+  background-color: var(--color-blanco);
+  box-shadow: 0 12px 22px -16px rgb(19 34 43 / 0.5);
+  transition:
+    translate 0.3s var(--ease-suave),
+    box-shadow 0.3s ease-out;
+}
+.dato-etiqueta {
+  display: grid;
+  gap: 8px;
+  color: var(--color-tinta-suave);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.dato-icono {
+  --icono-tamano: 20px;
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--tono) 22%, var(--color-blanco));
+  color: var(--color-tinta);
+  translate: 0 -50%;
+  transition:
+    rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.25s ease-out;
+}
+/* Desde tablet, ficha en columna: el ícono arriba y el texto debajo. */
+@media (min-width: 40rem) {
+  .dato-verano {
+    padding: 14px;
+  }
+  .dato-icono {
+    position: static;
+    translate: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dato-verano:hover {
+    translate: 0 -4px;
+    box-shadow: 0 20px 28px -18px rgb(19 34 43 / 0.55);
+  }
+  .dato-verano:hover .dato-icono {
+    background-color: var(--tono);
+    rotate: -10deg;
+    scale: 1.08;
+  }
+  .mes:not(.mes-verano):hover {
+    background-color: var(--color-crema-2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ruta-camino,
+  .parada-nube,
+  .calendario-sol,
+  .ola {
+    animation: none;
+  }
+  .mar {
+    transition: none;
+  }
+}

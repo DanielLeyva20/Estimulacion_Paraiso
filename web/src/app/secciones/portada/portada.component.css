@@ -1,0 +1,20 @@
+/* Entrada del título: cada línea aparece desenfocada y sube un poco, una tras otra. */
+.linea {
+  display: block;
+  animation: entrar-linea 0.9s var(--ease-suave) both;
+  animation-delay: calc(var(--linea) * 110ms + 120ms);
+}
+
+/* Mientras la pantalla de carga está encima, la entrada espera: así se ve completa al descubrirse. */
+:host-context(.cargando) .linea,
+:host-context(.cargando) .animate-trazo {
+  animation-play-state: paused;
+}
+
+@keyframes entrar-linea {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+    filter: blur(8px);
+  }
+}

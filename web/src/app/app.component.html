@@ -1,0 +1,39 @@
+<a
+  class="fixed top-3 left-3 z-100 -translate-y-[160%] rounded-full bg-tinta px-4 py-2.5 font-semibold text-crema transition-transform duration-300 ease-suave focus-visible:translate-y-0"
+  href="#espacios">
+  Saltar al contenido
+</a>
+
+<app-encabezado />
+
+<main class="relative">
+  <app-acequia class="pointer-events-none absolute inset-0 z-2 max-md:hidden" />
+  <app-portada />
+  <app-espacios />
+  <app-programas />
+
+  <!--
+    Carga diferida: lo que está debajo de los programas va en un paquete aparte que se descarga
+    cuando el navegador queda libre, así la portada aparece antes. El marcador reserva alto para que
+    la página no salte mientras tanto.
+  -->
+  @defer (on idle) {
+    <app-vacaciones />
+    <app-talleres />
+    <app-galeria />
+    <app-nosotros />
+    <app-confianza />
+    <app-pasos />
+    <app-preguntas />
+    <app-matricula />
+    <app-ubicacion />
+  } @placeholder {
+    <div class="min-h-[400svh]" aria-hidden="true"></div>
+  }
+</main>
+
+@defer (on idle) {
+  <app-pie />
+}
+<app-whatsapp-flotante />
+<app-redes-laterales />

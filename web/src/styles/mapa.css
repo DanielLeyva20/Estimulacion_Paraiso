@@ -1,0 +1,76 @@
+/*
+ * Ajustes de Leaflet a la identidad de Mi Paraíso. Van en un archivo global porque Leaflet
+ * crea su propio DOM (controles, marcador, globo) fuera de las plantillas de Angular.
+ */
+.mapa.leaflet-container {
+  background: var(--color-crema-2);
+  font-family: var(--font-texto);
+}
+
+/* Marcador: gota coral con un punto blanco y una onda suave alrededor. */
+.marcador-mapa {
+  background: none;
+  border: 0;
+}
+.marcador-mapa-pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--color-coral);
+  box-shadow: 0 10px 18px -8px rgb(19 34 43 / 0.55);
+  rotate: -45deg;
+}
+.marcador-mapa-pin::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgb(244 105 106 / 0.5);
+  animation: onda-marcador 2.4s var(--ease-suave) infinite;
+}
+.marcador-mapa-punto {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-blanco);
+}
+
+@keyframes onda-marcador {
+  70%,
+  100% {
+    box-shadow: 0 0 0 18px rgb(244 105 106 / 0);
+  }
+}
+
+.mapa .leaflet-popup-content-wrapper {
+  border-radius: var(--radius-parcela-sm);
+  box-shadow: var(--shadow-sombra);
+  color: var(--color-tinta);
+}
+.mapa .leaflet-popup-content {
+  margin: 12px 16px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.mapa .leaflet-bar {
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-etiqueta);
+}
+.mapa .leaflet-bar a {
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  color: var(--color-tinta);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marcador-mapa-pin::after {
+    animation: none;
+  }
+}

@@ -1,0 +1,336 @@
+/* Botón del menú: dos líneas que se cruzan en una X al abrir. */
+.boton-menu {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background-color: var(--color-blanco);
+  color: var(--color-tinta);
+  box-shadow: inset 0 0 0 1.5px rgb(19 34 43 / 0.16);
+  cursor: pointer;
+  transition: scale 0.15s var(--ease-suave);
+}
+.boton-menu:active {
+  scale: 0.94;
+}
+
+.hamburguesa {
+  position: relative;
+  width: 20px;
+  height: 14px;
+}
+.hamburguesa > span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition:
+    top 0.25s var(--ease-suave),
+    rotate 0.35s var(--ease-suave);
+}
+.hamburguesa > span:first-child {
+  top: 2px;
+}
+.hamburguesa > span:last-child {
+  top: 10px;
+}
+.hamburguesa.abierta > span {
+  top: 6px;
+}
+.hamburguesa.abierta > span:first-child {
+  rotate: 45deg;
+}
+.hamburguesa.abierta > span:last-child {
+  rotate: -45deg;
+}
+
+/* ---------- Menú (<dialog> modal) ---------- */
+
+/*
+ * El diálogo cubre toda la pantalla y es transparente: dentro va el panel. Al cerrarse sigue visible
+ * lo que dura la salida (display y overlay con allow-discrete) para que el panel alcance a irse.
+ */
+.menu {
+  --menu-duracion: 0.45s;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: transparent;
+  transition:
+    display var(--menu-duracion) allow-discrete,
+    overlay var(--menu-duracion) allow-discrete;
+}
+.menu[open] {
+  display: block;
+}
+
+/* Fondo atenuado y apenas desenfocado detrás del panel (se ve en escritorio). */
+.menu::backdrop {
+  background-color: rgb(19 34 43 / 0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color var(--menu-duracion) ease-out,
+    backdrop-filter var(--menu-duracion) ease-out,
+    display var(--menu-duracion) allow-discrete,
+    overlay var(--menu-duracion) allow-discrete;
+}
+.menu[open]::backdrop {
+  background-color: rgb(19 34 43 / 0.45);
+  backdrop-filter: blur(3px);
+}
+
+/*
+ * Panel turquesa (de claro a oscuro, para que el texto blanco tenga buen contraste). En el celular
+ * ocupa la pantalla y se abre en círculo desde el botón; en escritorio, ver la media query de abajo.
+ */
+.menu-panel {
+  --origen: calc(100% - var(--spacing-gutter) - 22px) 34px;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 14px var(--spacing-gutter) calc(96px + env(safe-area-inset-bottom));
+  background: linear-gradient(165deg, #0b8f80 0%, var(--color-turquesa-oscuro) 55%, #065a51 100%);
+  color: var(--color-blanco);
+  overscroll-behavior: contain;
+  clip-path: circle(0 at var(--origen));
+  transition: clip-path 0.35s cubic-bezier(0.55, 0, 1, 0.45);
+}
+.menu[open] .menu-panel {
+  clip-path: circle(150vmax at var(--origen));
+  transition: clip-path 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.menu-cabecera {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+}
+.menu-cerrar {
+  --icono-tamano: 22px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 0.14);
+  color: var(--color-blanco);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.3);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-out,
+    rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 0.15s ease-out;
+}
+.menu-cerrar:active {
+  scale: 0.92;
+}
+
+.menu-saludo {
+  position: relative;
+  justify-self: start;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: rgb(255 255 255 / 0.85);
+}
+
+.menu-enlaces {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+}
+
+/* Cada enlace: cuadro de color con su ícono, el nombre grande y una flecha que avanza al pasar. */
+.enlace-menu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 58px;
+  padding: 7px 14px 7px 7px;
+  border-radius: 18px;
+  color: var(--color-blanco);
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease-out,
+    translate 0.3s var(--ease-suave),
+    scale 0.15s ease-out;
+}
+.enlace-menu:active {
+  scale: 0.98;
+}
+.enlace-menu:focus-visible {
+  outline: 3px solid var(--color-mostaza);
+  outline-offset: 2px;
+}
+.enlace-menu.actual {
+  background-color: rgb(255 255 255 / 0.16);
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.28);
+}
+
+.enlace-icono {
+  --icono-tamano: 22px;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.16);
+  transition:
+    rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.enlace-texto {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.enlace-aqui {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: var(--color-mostaza);
+  color: var(--color-tinta);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.enlace-flecha {
+  --icono-tamano: 20px;
+  display: grid;
+  margin-left: auto;
+  color: rgb(255 255 255 / 0.5);
+  transition:
+    translate 0.3s var(--ease-suave),
+    color 0.2s ease-out;
+}
+
+.menu-pie {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+}
+
+/* Colinas decorativas al pie del panel. */
+.menu-colinas {
+  position: absolute;
+  inset: auto 0 0;
+  width: 100%;
+  height: 90px;
+  pointer-events: none;
+}
+.colina-lejana {
+  fill: var(--color-pasto);
+  opacity: 0.55;
+}
+.colina-cercana {
+  fill: var(--color-pasto-oscuro);
+}
+
+/* Entrada en cascada: cabecera, saludo, enlaces y pie aparecen uno tras otro al abrir. */
+.menu-saludo,
+.enlace-menu,
+.menu-pie {
+  opacity: 0;
+  translate: 0 16px;
+}
+.menu[open] .menu-saludo,
+.menu[open] .enlace-menu,
+.menu[open] .menu-pie {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 0.4s var(--ease-suave),
+    translate 0.5s var(--ease-suave),
+    background-color 0.2s ease-out;
+  transition-delay: calc(140ms + var(--orden, 0) * 40ms);
+}
+@starting-style {
+  .menu[open] .menu-saludo,
+  .menu[open] .enlace-menu,
+  .menu[open] .menu-pie {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  .menu[open] .menu-panel {
+    clip-path: circle(0 at var(--origen));
+  }
+  .menu[open]::backdrop {
+    background-color: rgb(19 34 43 / 0);
+    backdrop-filter: blur(0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menu-cerrar:hover {
+    background-color: rgb(255 255 255 / 0.24);
+    rotate: 90deg;
+  }
+  .enlace-menu:hover {
+    background-color: rgb(255 255 255 / 0.12);
+    translate: 6px 0;
+  }
+  .enlace-menu:hover .enlace-icono {
+    rotate: -8deg;
+    scale: 1.08;
+  }
+  .enlace-menu:hover .enlace-flecha {
+    translate: 4px 0;
+    color: var(--color-blanco);
+  }
+}
+
+/* Escritorio: panel lateral que entra desde la derecha; la página sigue a la vista, atenuada. */
+@media (min-width: 64rem) {
+  .menu-panel {
+    inset: 0 0 0 auto;
+    width: min(440px, 100vw);
+    padding: 20px 28px 110px;
+    border-radius: 32px 0 0 32px;
+    box-shadow: -30px 0 60px -30px rgb(0 0 0 / 0.5);
+    clip-path: none;
+    translate: 100% 0;
+    transition: translate 0.35s cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  .menu[open] .menu-panel {
+    clip-path: none;
+    translate: 0 0;
+    transition: translate 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  @starting-style {
+    .menu[open] .menu-panel {
+      translate: 100% 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .menu::backdrop,
+  .menu-panel,
+  .menu[open] .menu-panel,
+  .menu[open] .menu-saludo,
+  .menu[open] .enlace-menu,
+  .menu[open] .menu-pie {
+    transition-duration: 0.01s;
+    transition-delay: 0s;
+  }
+}

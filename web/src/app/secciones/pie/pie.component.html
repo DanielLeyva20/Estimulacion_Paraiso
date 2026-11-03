@@ -1,0 +1,64 @@
+<footer class="pie">
+  <app-divisor class="text-cielo" forma="colinas" />
+  <app-fondo-dibujado class="text-azul/35" [ondas]="false" [vuelo]="true" [garabatos]="garabatos" />
+  <app-siluetas-fondo class="text-white/85" [siluetas]="nubes" />
+
+  <div class="contenedor pie-cuerpo">
+    <!-- Marca: logo, quiénes somos y redes. -->
+    <div class="grid content-start justify-items-start gap-5 lg:col-span-5">
+      <app-logo variante="pie" />
+      <p class="max-w-sm text-[0.98rem] text-tinta-suave">
+        Estimulación temprana, talleres, nido y cuidado para niños de 1 a 2 años en Imperial, Cañete.
+      </p>
+      <div class="grid gap-3">
+        <h2 class="pie-titulo">Síguenos</h2>
+        <app-redes-sociales fondo="claro" />
+      </div>
+    </div>
+
+    <nav class="grid content-start gap-4 lg:col-span-3" aria-labelledby="pie-explora">
+      <h2 id="pie-explora" class="pie-titulo">Explora</h2>
+      <ul class="grid grid-cols-2 gap-x-6 gap-y-2.5">
+        @for (enlace of enlaces; track enlace.id) {
+          <li>
+            <a class="pie-enlace" [href]="'#' + enlace.id">{{ enlace.texto }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <div class="grid content-start gap-4 lg:col-span-4">
+      <h2 class="pie-titulo">Visítanos</h2>
+      <a class="pie-contacto" [href]="whatsapp" target="_blank" rel="noopener">
+        <span class="pie-contacto-icono" data-tono="turquesa"><app-icono nombre="whatsapp" /></span>
+        <span>
+          <span class="block text-sm text-tinta-suave">WhatsApp</span>
+          <strong class="font-semibold">{{ telefono }}</strong>
+        </span>
+      </a>
+      <a class="pie-contacto" [href]="comoLlegar" target="_blank" rel="noopener">
+        <span class="pie-contacto-icono" data-tono="coral"><app-icono nombre="ubicacion" /></span>
+        <span>
+          <span class="block text-sm text-tinta-suave">{{ ubicacion }}</span>
+          <strong class="font-semibold">Cómo llegar</strong>
+        </span>
+      </a>
+      <a class="boton mt-1 w-full sm:w-auto sm:justify-self-start" [href]="whatsappVisita" target="_blank" rel="noopener">
+        <app-icono nombre="whatsapp" /> Agenda una visita
+      </a>
+    </div>
+  </div>
+
+  <!-- El cuento termina en las colinas: tres capas de pasto y el bosque con los créditos. -->
+  <svg class="pie-colinas" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+    <path class="colina-lejana" d="M0 70C220 20 420 30 620 62s420 34 600-6 180-20 220-12V140H0Z" />
+    <path class="colina-media" d="M0 98c200-30 380-26 560 2s360 30 560-4 240-18 320-10V140H0Z" />
+    <path class="colina-cercana" d="M0 124c240-24 460-18 680 4s440 14 620-8 120-10 140-6V140H0Z" />
+  </svg>
+  <div class="pie-base">
+    <div class="contenedor flex flex-wrap justify-between gap-x-6 gap-y-2">
+      <span>© {{ anio }} Mi Paraíso · {{ ubicacion }}</span>
+      <span>Las fotografías y el video son referenciales.</span>
+    </div>
+  </div>
+</footer>

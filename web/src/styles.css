@@ -1,0 +1,7 @@
+@import 'tailwindcss' source('./');
+
+@import './styles/theme.css';
+@import './styles/base.css';
+@import './styles/components.css';
+@import './styles/mapa.css';
+@import './styles/pantalla-carga.css';

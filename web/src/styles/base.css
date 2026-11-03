@@ -1,0 +1,86 @@
+/* Estilos de los elementos HTML sin clase. Tailwind ya aporta el reset (preflight). */
+@layer base {
+  html {
+    --texto-secundario: var(--color-tinta-suave);
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    scrollbar-color: var(--color-turquesa) var(--color-crema);
+    color-scheme: light;
+  }
+
+  body {
+    @apply overflow-x-clip bg-crema font-texto text-tinta antialiased;
+    font-size: clamp(1.0625rem, 0.4vw + 0.98rem, 1.1875rem);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-extrabold text-balance;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    @apply text-titulo;
+  }
+
+  h3 {
+    @apply text-subtitulo font-bold;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1.5px;
+  }
+
+  /* Con un diálogo modal abierto (menú o visor de la galería), la página de fondo no se desplaza. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  ::selection {
+    @apply bg-mostaza text-tinta;
+  }
+
+  input,
+  select {
+    caret-color: var(--color-turquesa-oscuro);
+  }
+
+  :focus-visible {
+    @apply rounded-lg outline-3 outline-offset-3 outline-agua;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-crema;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full border-3 border-crema bg-turquesa;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

@@ -1,0 +1,33 @@
+@if (ondas()) {
+  <!-- Ondas: capas onduladas en las esquinas, una más clara y otra más oscura que el fondo. -->
+  <svg class="ondas" viewBox="0 0 1440 900" preserveAspectRatio="none">
+    <path class="onda-clara" d="M0 0h760c-40 120-170 150-290 190S220 320 140 420 40 560 0 600Z" />
+    <path class="onda-clara" d="M0 900V700c90-50 200-40 280 10s150 140 300 190Z" />
+    <path class="onda-oscura" d="M1440 520c-120 30-210 120-260 220s-140 140-260 160h520Z" />
+    <path class="onda-clara" d="M1440 640c-90 20-150 90-190 160s-100 90-180 100h370Z" />
+  </svg>
+}
+
+@if (halo()) {
+  <div class="halo"></div>
+}
+
+@if (vuelo()) {
+  <svg class="vuelo" viewBox="0 0 320 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path class="rastro" d="M4 110C50 102 80 70 118 76s44 38 84 30 52-56 82-76" />
+    <g class="avion">
+      <path d="M262 26 310 6 296 52l-11-16Z" />
+      <path d="m285 36 25-30M285 36l-2 14 7-8" />
+    </g>
+  </svg>
+}
+
+@if (curva()) {
+  <svg class="curva" viewBox="0 0 400 60" fill="none" stroke-linecap="round">
+    <path class="rastro" d="M4 40C70 10 120 56 190 34s130-30 206 6" />
+  </svg>
+}
+
+@for (garabato of garabatos(); track $index) {
+  <app-garabato [ngClass]="garabato.clases" [forma]="garabato.forma" [style.--desfase.s]="$index * 0.6" />
+}

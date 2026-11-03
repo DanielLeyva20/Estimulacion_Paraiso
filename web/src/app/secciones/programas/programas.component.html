@@ -1,0 +1,80 @@
+<!--
+  Cada programa es una franja de color a todo el ancho con confeti, fondo dibujado a mano y siluetas
+  infantiles flotando.
+-->
+<section id="programas" class="relative" aria-labelledby="titulo-programas">
+  <div class="contenedor pb-[clamp(88px,10vw,144px)]">
+    <header class="encabezado-seccion mb-0" data-acequia="programas">
+      <h2 id="titulo-programas" appRevelar>
+        Programas que acompañan
+        <span class="con-subrayado text-morado">su crecimiento<app-garabato class="subrayado-titulo text-coral" forma="subrayado" /></span>
+      </h2>
+      <p appRevelar="100">
+        Tres programas, una misma idea: acompañar a cada niño en su etapa, a su ritmo, con juego, cariño y propósito.
+      </p>
+    </header>
+  </div>
+
+  @for (programa of programas; track programa.id; let invertido = $odd) {
+    <article
+      class="franja-programa relative pt-[clamp(48px,6vw,88px)] pb-[clamp(96px,12vw,176px)]"
+      [ngClass]="programa.tema.franja"
+      [attr.aria-labelledby]="'prog-' + programa.id">
+      <app-divisor [ngClass]="programa.tema.divisor" [forma]="programa.tema.formaDivisor" [invertido]="invertido" />
+
+      <app-fondo-dibujado
+        [ngClass]="programa.tema.trazos"
+        [garabatos]="programa.fondo.garabatos"
+        [vuelo]="programa.fondo.vuelo ?? false"
+        [curva]="programa.fondo.curva ?? false" />
+      <app-siluetas-fondo [ngClass]="programa.tema.siluetas" [siluetas]="programa.siluetas" />
+
+      <div
+        class="contenedor relative grid items-center gap-[clamp(48px,6vw,96px)] md:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
+        <div class="grid justify-items-start gap-5" [class.md:order-2]="invertido">
+          <h3 class="text-titulo leading-[1.05] font-extrabold text-balance" [id]="'prog-' + programa.id" appRevelar>
+            {{ programa.titulo.inicio }}
+            <span class="resalte-recortado" [ngClass]="programa.tema.resalte">{{ programa.titulo.resalte }}</span>
+          </h3>
+          <p class="max-w-[34rem] text-[1.125rem] leading-relaxed text-(--texto-secundario)" appRevelar="80">
+            {{ programa.descripcion }}
+          </p>
+
+          <div class="grid gap-3" appRevelar="160">
+            <span class="text-[0.95rem] font-bold">Lo que desarrolla</span>
+            <ul class="flex flex-wrap gap-2">
+              @for (area of programa.desarrolla; track area) {
+                <li class="area-programa" [attr.data-tono]="tonosAreas[$index % tonosAreas.length]">{{ area }}</li>
+              }
+            </ul>
+          </div>
+
+          <a class="boton boton-blanco mt-3" [href]="programa.whatsapp" target="_blank" rel="noopener" appRevelar="240">
+            Preguntar por {{ programa.nombre.toLowerCase() }} <app-icono nombre="flecha" />
+          </a>
+        </div>
+
+        <!-- Foto en lámina, con la insignia del programa en una esquina. -->
+        <figure class="relative mx-auto w-full max-w-[34rem]" appRevelar="120">
+          <div class="lamina" [style.--lamina-giro]="invertido ? '2deg' : null">
+            <img
+              class="aspect-4/3"
+              [appAdaptable]="programa.foto.src"
+              sizes="(min-width: 48rem) 544px, 92vw"
+              [alt]="programa.foto.alt"
+              [width]="programa.foto.ancho"
+              [height]="programa.foto.alto"
+              loading="lazy"
+              decoding="async" />
+          </div>
+          <span
+            class="absolute -bottom-6 grid size-16 place-items-center rounded-full bg-blanco shadow-etiqueta [--icono-tamano:30px] md:size-20 md:[--icono-tamano:36px]"
+            [ngClass]="[programa.tema.insignia, invertido ? '-left-3 md:-left-6' : '-right-3 md:-right-6']"
+            aria-hidden="true">
+            <app-icono [nombre]="programa.icono" />
+          </span>
+        </figure>
+      </div>
+    </article>
+  }
+</section>

@@ -1,0 +1,81 @@
+/*
+ * Nube: tarjeta blanca muy redondeada con copos de distintos tamaños asomando por los cuatro bordes
+ * (COPOS_NUBE). La sombra va con drop-shadow para que siga el contorno de la nube completa.
+ */
+.nube {
+  position: relative;
+  margin-block: clamp(48px, 10vw, 130px) clamp(40px, 8vw, 110px);
+  padding: clamp(28px, 4vw, 56px);
+  border-radius: clamp(40px, 6vw, 90px);
+  background-color: var(--color-blanco);
+  filter: drop-shadow(0 24px 36px rgb(31 77 117 / 0.16));
+}
+
+.nube-copo {
+  position: absolute;
+  width: calc(var(--tamano) * 1%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--color-blanco);
+}
+.nube-copo[data-borde='arriba'] {
+  top: 0;
+  left: calc(var(--posicion) * 1%);
+  translate: -50% -42%;
+}
+.nube-copo[data-borde='abajo'] {
+  bottom: 0;
+  left: calc(var(--posicion) * 1%);
+  translate: -50% 42%;
+}
+.nube-copo[data-borde='izquierda'] {
+  top: calc(var(--posicion) * 1%);
+  left: 0;
+  translate: -36% -50%;
+}
+.nube-copo[data-borde='derecha'] {
+  top: calc(var(--posicion) * 1%);
+  right: 0;
+  translate: 36% -50%;
+}
+
+/* En el celular la nube es angosta: copos de arriba y abajo más grandes y sin los laterales. */
+@media (max-width: 40rem) {
+  .nube-copo {
+    width: calc(var(--tamano) * 1.7%);
+  }
+  .nube-copo[data-borde='izquierda'],
+  .nube-copo[data-borde='derecha'] {
+    display: none;
+  }
+}
+
+/* Sello con los años del colegio, pegado en la esquina superior de la foto (abajo va la leyenda). */
+.sello-anios {
+  position: absolute;
+  top: -28px;
+  right: -10px;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 2px;
+  width: clamp(104px, 12vw, 128px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background-color: var(--color-mostaza);
+  color: var(--color-tinta);
+  text-align: center;
+  rotate: 8deg;
+  box-shadow:
+    inset 0 0 0 6px var(--color-mostaza),
+    inset 0 0 0 8px rgb(19 34 43 / 0.3),
+    var(--shadow-tarjeta);
+}
+
+.razon {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+}
+

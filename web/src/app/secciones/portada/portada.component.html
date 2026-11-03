@@ -1,0 +1,73 @@
+<section
+  id="inicio"
+  class="relative isolate flex min-h-[min(100svh,980px)] items-end overflow-hidden bg-tinta pt-28 pb-[clamp(104px,12vw,168px)] text-white md:items-center"
+  aria-labelledby="titulo-portada"
+  data-acequia="inicio">
+  <video
+    #video
+    class="absolute inset-0 -z-2 size-full object-cover object-[60%_35%]"
+    poster="img/portada-video.webp"
+    preload="none"
+    loop
+    muted
+    playsinline
+    disablepictureinpicture
+    aria-hidden="true">
+    <!-- WebM (más liviano) para Chrome, Edge y Firefox; MP4 para Safari y el resto. -->
+    <source src="video/portada.webm" type="video/webm" />
+    <source src="video/portada.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Velo: oscurece el lado del texto para que siempre se lea sobre el video. -->
+  <div
+    class="absolute inset-0 -z-1 bg-[linear-gradient(0deg,rgb(19_34_43/0.9)_8%,rgb(19_34_43/0.45)_58%,rgb(19_34_43/0.2)_100%)] md:bg-[linear-gradient(90deg,rgb(19_34_43/0.86)_0%,rgb(19_34_43/0.55)_48%,rgb(19_34_43/0.05)_100%)]"
+    aria-hidden="true"></div>
+
+  <div class="contenedor grid justify-items-start gap-6 md:gap-7">
+    <h1 id="titulo-portada" class="max-w-[12ch] text-hero max-md:text-[clamp(2.6rem,12vw,3.6rem)]">
+      <span class="linea" style="--linea: 0">Un pequeño</span>
+      <span class="linea" style="--linea: 1">
+        <span class="relative inline-block text-mostaza">
+          paraíso
+          <svg
+            class="absolute -bottom-[0.1em] -left-[2%] h-[0.32em] w-[104%] animate-trazo fill-none stroke-coral stroke-6 [stroke-dasharray:260] [stroke-dashoffset:260] [stroke-linecap:round]"
+            viewBox="0 0 220 24"
+            preserveAspectRatio="none"
+            aria-hidden="true">
+            <path d="M4 16c38-10 78-12 118-8s66 6 94-4" />
+          </svg>
+        </span>
+      </span>
+      <span class="linea" style="--linea: 2">para crecer</span>
+    </h1>
+
+    <p class="max-w-xl text-[1.1875em] text-white/90 max-md:text-[1.0625em]" appRevelar="350">
+      Estimulación temprana, talleres, nido y cuidado para niños de
+      <strong class="font-semibold text-white">1 a 2 años</strong>
+      en Imperial, Cañete. Espacios pensados para su tamaño, su ritmo y su curiosidad.
+    </p>
+
+    <div class="flex w-full flex-wrap gap-3" appRevelar="450">
+      <a class="boton w-full sm:w-auto" [href]="whatsappVisita" target="_blank" rel="noopener">
+        <app-icono nombre="whatsapp" /> Agenda una visita
+      </a>
+      <a class="boton boton-claro w-full sm:w-auto" href="#espacios">
+        Recorre los espacios <app-icono nombre="flecha" />
+      </a>
+    </div>
+
+    <ul class="flex flex-wrap gap-2 text-sm font-semibold text-tinta" aria-label="En resumen" appRevelar="550">
+      <li class="rounded-full bg-turquesa px-3.5 py-1.5">1 a 2 años</li>
+      <li class="rounded-full bg-mostaza px-3.5 py-1.5">Imperial, Cañete</li>
+      <li class="rounded-full bg-coral px-3.5 py-1.5">Grupos pequeños</li>
+    </ul>
+  </div>
+
+  <button
+    type="button"
+    class="absolute right-gutter bottom-[clamp(64px,8vw,120px)] grid size-12 cursor-pointer place-items-center rounded-full bg-white/15 text-white shadow-[inset_0_0_0_1.5px_rgb(255_255_255/0.45)] backdrop-blur-md transition-[background-color,scale] duration-200 ease-suave hover:bg-white/30 active:scale-[0.94] max-md:top-24 max-md:bottom-auto"
+    [attr.aria-label]="reproduciendo() ? 'Pausar el video de fondo' : 'Reproducir el video de fondo'"
+    (click)="alternarVideo()">
+    <app-icono [nombre]="reproduciendo() ? 'pausa' : 'reproducir'" />
+  </button>
+</section>

@@ -1,0 +1,202 @@
+:host {
+  /* Colores de reposo según el fondo; los de cada marca van en [data-red]. */
+  --red-fondo: rgb(255 255 255 / 0.08);
+  --red-borde: rgb(255 255 255 / 0.18);
+  --red-etiqueta-fondo: var(--color-blanco);
+  --red-etiqueta-texto: var(--color-tinta);
+  --red-tiktok: var(--color-blanco);
+  display: block;
+}
+:host([data-fondo='claro']) {
+  --red-fondo: var(--color-blanco);
+  --red-borde: rgb(19 34 43 / 0.12);
+  --red-etiqueta-fondo: var(--color-tinta);
+  --red-etiqueta-texto: var(--color-blanco);
+  --red-tiktok: var(--color-tinta);
+}
+
+.redes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Colores oficiales de cada red: el ícono los luce en reposo y el botón se llena con ellos al activarse. */
+[data-red='youtube'] {
+  --marca: #ff0033;
+  --marca-icono: #ff0033;
+}
+[data-red='facebook'] {
+  --marca: #1877f2;
+  --marca-icono: #3b8bf5;
+}
+[data-red='tiktok'] {
+  --marca: #010101;
+  --marca-icono: var(--red-tiktok);
+}
+
+.red {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background-color: var(--red-fondo);
+  box-shadow: inset 0 0 0 1.5px var(--red-borde);
+  color: var(--marca-icono);
+  transition:
+    translate 0.25s var(--ease-suave),
+    scale 0.15s ease-out,
+    color 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+}
+
+/* Relleno de color de la marca, que sube desde abajo como un círculo que crece. */
+.red::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--marca);
+  clip-path: circle(0 at 50% 100%);
+  transition: clip-path 0.3s var(--ease-suave);
+}
+
+.red-icono {
+  --icono-tamano: 24px;
+  position: relative;
+  display: grid;
+}
+/* El ícono de TikTok lleva su efecto de doble color (cian y rosa) desplazado. */
+[data-red='tiktok'] .red-icono {
+  filter: drop-shadow(-1.5px -1px 0 #25f4ee) drop-shadow(1.5px 1px 0 #fe2c55);
+}
+
+/* Nombre de la red: aparece encima del botón como una etiqueta. */
+.red-nombre {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: var(--red-etiqueta-fondo);
+  color: var(--red-etiqueta-texto);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  translate: -50% 4px;
+  scale: 0.9;
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.15s ease-out,
+    translate 0.15s ease-out,
+    scale 0.15s ease-out;
+}
+
+/* Activo: con el mouse encima, al enfocarlo con el teclado o mientras se toca en el celular. */
+.red:focus-visible,
+.red:active {
+  color: var(--color-blanco);
+  box-shadow: inset 0 0 0 1.5px transparent;
+}
+.red:focus-visible::before,
+.red:active::before {
+  clip-path: circle(120% at 50% 100%);
+}
+.red:focus-visible .red-nombre {
+  opacity: 1;
+  translate: -50% 0;
+  scale: 1;
+}
+.red:active {
+  scale: 0.94;
+}
+.red:focus-visible {
+  outline: 3px solid var(--color-mostaza);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .red:hover {
+    translate: 0 -4px;
+    color: var(--color-blanco);
+    box-shadow: inset 0 0 0 1.5px transparent;
+  }
+  .red:hover::before {
+    clip-path: circle(120% at 50% 100%);
+  }
+  .red:hover .red-icono {
+    animation: saludar 0.5s ease-out;
+  }
+  .red:hover .red-nombre {
+    opacity: 1;
+    translate: -50% 0;
+    scale: 1;
+  }
+}
+
+/* En columna (barra lateral): un botón debajo de otro, el nombre sale a la derecha y el botón se asoma hacia allá. */
+:host([data-orientacion='vertical']) .redes {
+  flex-direction: column;
+  gap: 10px;
+}
+:host([data-orientacion='vertical']) .red {
+  width: 44px;
+  height: 44px;
+}
+:host([data-orientacion='vertical']) .red-icono {
+  --icono-tamano: 21px;
+}
+/* La barra lateral pasa sobre fondos claros y oscuros: su etiqueta es siempre blanca con sombra. */
+:host([data-orientacion='vertical']) .red-nombre {
+  background-color: var(--color-blanco);
+  color: var(--color-tinta);
+  box-shadow: var(--shadow-etiqueta);
+  top: 50%;
+  bottom: auto;
+  left: calc(100% + 12px);
+  translate: -4px -50%;
+  transform-origin: 0 50%;
+}
+:host([data-orientacion='vertical']) .red:focus-visible .red-nombre {
+  translate: 0 -50%;
+}
+@media (hover: hover) and (pointer: fine) {
+  :host([data-orientacion='vertical']) .red:hover {
+    translate: 4px 0;
+  }
+  :host([data-orientacion='vertical']) .red:hover .red-nombre {
+    translate: 0 -50%;
+  }
+}
+
+@keyframes saludar {
+  30% {
+    rotate: -14deg;
+    scale: 1.12;
+  }
+  60% {
+    rotate: 9deg;
+  }
+  85% {
+    rotate: -4deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .red,
+  .red::before,
+  .red-nombre {
+    transition-duration: 0.01s;
+  }
+  .red:hover {
+    translate: 0 0;
+  }
+  .red:hover .red-icono {
+    animation: none;
+  }
+}

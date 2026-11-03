@@ -1,0 +1,377 @@
+/* ---------- Colores por categoría (filtros y etiquetas de cada foto) ---------- */
+[data-categoria] {
+  --categoria: var(--color-blanco);
+}
+[data-categoria='espacios'] {
+  --categoria: var(--color-turquesa);
+}
+[data-categoria='estimulacion'] {
+  --categoria: var(--color-coral);
+}
+[data-categoria='juegos'] {
+  --categoria: var(--color-mostaza);
+}
+[data-categoria='talleres'] {
+  --categoria: var(--color-cielo);
+}
+[data-categoria='verano'] {
+  --categoria: color-mix(in srgb, var(--color-mostaza) 45%, var(--color-blanco));
+}
+[data-categoria='familias'] {
+  --categoria: color-mix(in srgb, var(--color-coral) 40%, var(--color-blanco));
+}
+
+/* ---------- Filtros ---------- */
+.filtro {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px 5px 5px;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 0.1);
+  color: var(--color-blanco);
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.28);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.25s var(--ease-suave),
+    color 0.25s var(--ease-suave),
+    box-shadow 0.25s var(--ease-suave),
+    scale 0.15s ease-out;
+}
+.filtro:active {
+  scale: 0.96;
+}
+.filtro:focus-visible {
+  outline: 3px solid var(--color-mostaza);
+  outline-offset: 3px;
+}
+
+/* Burbuja del ícono: siempre lleva el color de su categoría, así se reconocen antes de elegir. */
+.filtro-icono {
+  --icono-tamano: 16px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background-color: var(--categoria);
+  color: var(--color-tinta);
+  transition:
+    background-color 0.25s var(--ease-suave),
+    scale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.filtro-cantidad {
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+/* Elegido: todo el botón toma el color de la categoría y el ícono da un saltito. */
+.filtro[aria-pressed='true'] {
+  background-color: var(--categoria);
+  color: var(--color-tinta);
+  box-shadow: 0 10px 20px -12px rgb(19 34 43 / 0.6);
+}
+.filtro[aria-pressed='true'] .filtro-icono {
+  background-color: rgb(255 255 255 / 0.6);
+  scale: 1.08;
+  rotate: -8deg;
+}
+
+/* ---------- Fotos ---------- */
+
+/*
+ * Inclinación 3D hacia el puntero: InclinarDirective escribe --giro-x / --giro-y. La transición
+ * suaviza el seguimiento y la devuelve a su sitio al salir.
+ */
+.foto-celda {
+  transform: perspective(900px) rotateX(var(--giro-x, 0deg)) rotateY(var(--giro-y, 0deg));
+  transition: transform 0.5s var(--ease-suave);
+}
+.foto-celda:hover {
+  z-index: 1;
+}
+
+/* Aparición al hacer scroll: además de subir (estilo global de .revelar), la foto se descubre de abajo hacia arriba. */
+.foto-galeria.revelar {
+  clip-path: inset(24% 0 0 0 round var(--radius-parcela));
+  transition:
+    clip-path 1s var(--ease-suave) var(--retraso, 0ms),
+    opacity 0.8s var(--ease-suave) var(--retraso, 0ms),
+    transform 1s var(--ease-suave) var(--retraso, 0ms);
+}
+.foto-galeria.revelar.visible {
+  clip-path: inset(0 round var(--radius-parcela));
+}
+
+/* Reflejo de luz que sigue al puntero sobre la foto. */
+.foto-brillo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--puntero-x, 50%) var(--puntero-y, 50%),
+    rgb(255 255 255 / 0.3),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.foto-pie {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 40px 14px 12px;
+  background: linear-gradient(0deg, rgb(19 34 43 / 0.8), transparent);
+  text-align: left;
+  pointer-events: none;
+}
+
+.foto-etiqueta {
+  --icono-tamano: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px 4px 8px;
+  border-radius: 999px;
+  background-color: var(--categoria);
+  color: var(--color-tinta);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: translate 0.3s var(--ease-suave);
+}
+
+.foto-ampliar {
+  --icono-tamano: 18px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 0.9);
+  color: var(--color-tinta);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.85;
+  transition:
+    opacity 0.2s var(--ease-suave),
+    scale 0.2s var(--ease-suave);
+}
+.foto-galeria:focus-visible .foto-ampliar {
+  opacity: 1;
+  scale: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .filtro:not([aria-pressed='true']):hover {
+    background-color: rgb(255 255 255 / 0.2);
+  }
+  .filtro:not([aria-pressed='true']):hover .filtro-icono {
+    scale: 1.1;
+    rotate: -12deg;
+  }
+  .foto-galeria:hover .foto-brillo,
+  .foto-galeria:hover .foto-ampliar {
+    opacity: 1;
+    scale: 1;
+  }
+  .foto-galeria:hover .foto-etiqueta {
+    translate: 0 -3px;
+  }
+}
+
+@media (max-width: 40rem) {
+  .foto-pie {
+    padding: 36px 12px 10px;
+  }
+  .foto-etiqueta {
+    display: none;
+  }
+}
+
+/* ---------- Visor ---------- */
+
+/* Visor a pantalla completa con fondo oscuro. Entra con fundido y una leve escala; los modales escalan desde el centro. */
+.visor {
+  inset: 0;
+  display: none;
+  place-items: center;
+  width: 100vw;
+  max-width: none;
+  height: 100svh;
+  max-height: none;
+  padding: clamp(64px, 7vw, 88px) clamp(16px, 7vw, 96px) clamp(20px, 3vw, 32px);
+  background: transparent;
+  opacity: 0;
+  transition:
+    opacity 220ms var(--ease-suave),
+    display 220ms allow-discrete,
+    overlay 220ms allow-discrete;
+}
+.visor[open] {
+  display: grid;
+  opacity: 1;
+}
+
+.visor::backdrop {
+  background-color: rgb(19 34 43 / 0);
+  transition:
+    background-color 220ms var(--ease-suave),
+    display 220ms allow-discrete,
+    overlay 220ms allow-discrete;
+}
+.visor[open]::backdrop {
+  background-color: rgb(19 34 43 / 0.92);
+}
+
+.visor-contenido {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: min(100%, 1100px);
+}
+
+/* Cada foto nueva entra desde el lado hacia el que se avanza (--direccion: 1 o -1). */
+.visor-foto {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  max-width: 100%;
+  touch-action: pan-y;
+  user-select: none;
+  animation: entrar-foto 0.35s var(--ease-suave);
+  transition: scale 260ms var(--ease-suave);
+}
+.visor-imagen {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 280px);
+  border-radius: var(--radius-parcela);
+  object-fit: contain;
+}
+
+@keyframes entrar-foto {
+  from {
+    opacity: 0;
+    translate: calc(var(--direccion, 1) * 48px) 0;
+  }
+}
+
+@starting-style {
+  .visor[open] {
+    opacity: 0;
+  }
+  .visor[open] .visor-foto {
+    scale: 0.96;
+  }
+  .visor[open]::backdrop {
+    background-color: rgb(19 34 43 / 0);
+  }
+}
+
+/* Tira de miniaturas: la actual queda resaltada y centrada. */
+.visor-miniaturas {
+  display: flex;
+  gap: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 6px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.visor-miniatura {
+  flex: none;
+  width: 64px;
+  height: 48px;
+  overflow: hidden;
+  border-radius: 12px;
+  opacity: 0.45;
+  cursor: pointer;
+  scroll-snap-align: center;
+  transition:
+    opacity 0.2s ease-out,
+    scale 0.25s var(--ease-suave),
+    box-shadow 0.2s ease-out;
+}
+.visor-miniatura img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.visor-miniatura[aria-current='true'] {
+  opacity: 1;
+  scale: 1.08;
+  box-shadow: 0 0 0 3px var(--color-mostaza);
+}
+.visor-miniatura:focus-visible {
+  opacity: 1;
+  outline: 3px solid var(--color-blanco);
+  outline-offset: 2px;
+}
+
+.visor-boton {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.14);
+  color: white;
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.35);
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--ease-suave),
+    scale 150ms var(--ease-suave);
+}
+.visor-boton:active {
+  scale: 0.94;
+}
+.visor-flecha {
+  top: 50%;
+  translate: 0 -50%;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .visor-boton:hover {
+    background: rgb(255 255 255 / 0.28);
+  }
+  .visor-miniatura:not([aria-current='true']):hover {
+    opacity: 0.8;
+  }
+}
+
+/* En el celular se cambia de foto deslizando o con las miniaturas: las flechas solo estorbarían. */
+@media (max-width: 40rem) {
+  .visor-flecha {
+    display: none;
+  }
+  .visor-imagen {
+    max-height: calc(100svh - 240px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foto-celda {
+    transition: none;
+  }
+  .visor-foto {
+    animation: none;
+  }
+}

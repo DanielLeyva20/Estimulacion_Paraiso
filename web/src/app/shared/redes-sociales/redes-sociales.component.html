@@ -1,0 +1,17 @@
+<ul class="redes" aria-label="Redes sociales de Mi Paraíso">
+  @for (red of redes; track red.id; let i = $index) {
+    <li>
+      <a
+        class="red"
+        [attr.data-red]="red.id"
+        [style.--orden]="i"
+        [href]="red.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'Mi Paraíso en ' + red.nombre + ' (se abre en otra pestaña)'">
+        <span class="red-icono"><app-icono [nombre]="red.icono" /></span>
+        <span class="red-nombre" aria-hidden="true">{{ red.nombre }}</span>
+      </a>
+    </li>
+  }
+</ul>

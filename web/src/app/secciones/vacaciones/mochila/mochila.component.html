@@ -1,0 +1,301 @@
+<div class="mochila">
+  <!-- Dibujo: lo marcado sube desde dentro y asoma por la abertura; el bolsillo cuenta cuántas cosas van. -->
+  <div class="mochila-dibujo" [class.lista]="estaLista()">
+    <svg viewBox="0 0 320 340" aria-hidden="true">
+      <defs>
+        <symbol id="objeto-ropa" viewBox="0 0 64 64">
+          <g
+            style="
+              stroke: var(--color-tinta);
+              stroke-width: 2.5;
+              stroke-linejoin: round;
+              stroke-linecap: round;
+            "
+          >
+            <path
+              style="fill: var(--color-coral)"
+              d="M22 8 10 14 4 28l10 4 2-5v31h32V27l2 5 10-4-6-14-12-6c-2 5-6 8-10 8s-8-3-10-8Z"
+            />
+            <path style="fill: none" d="M24 40h16" />
+          </g>
+        </symbol>
+        <symbol id="objeto-muda" viewBox="0 0 64 64">
+          <g
+            style="
+              stroke: var(--color-tinta);
+              stroke-width: 2.5;
+              stroke-linejoin: round;
+              stroke-linecap: round;
+            "
+          >
+            <path
+              style="fill: var(--color-azul)"
+              d="M12 10h40l4 44H38l-6-24-6 24H8Z"
+            />
+            <path style="fill: var(--color-azul-oscuro)" d="M12 10h40v8H12Z" />
+          </g>
+        </symbol>
+        <symbol id="objeto-lonchera" viewBox="0 0 64 64">
+          <g
+            style="
+              stroke: var(--color-tinta);
+              stroke-width: 2.5;
+              stroke-linejoin: round;
+              stroke-linecap: round;
+            "
+          >
+            <path
+              style="fill: none"
+              d="M22 20v-6a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v6"
+            />
+            <rect
+              style="fill: var(--color-morado)"
+              x="6"
+              y="20"
+              width="52"
+              height="38"
+              rx="10"
+            />
+            <path style="fill: none" d="M6 34h52" />
+            <rect
+              style="fill: var(--color-mostaza)"
+              x="27"
+              y="29"
+              width="10"
+              height="10"
+              rx="2.5"
+            />
+          </g>
+        </symbol>
+        <symbol id="objeto-mandil" viewBox="0 0 64 64">
+          <g
+            style="
+              stroke: var(--color-tinta);
+              stroke-width: 2.5;
+              stroke-linejoin: round;
+              stroke-linecap: round;
+            "
+          >
+            <path style="fill: none" d="M24 15c0-6 3-10 8-10s8 4 8 10" />
+            <path
+              style="fill: var(--color-mostaza)"
+              d="M20 14h24l2 12 10 4-4 28H12L8 30l10-4Z"
+            />
+            <rect
+              style="fill: var(--color-blanco)"
+              x="24"
+              y="38"
+              width="16"
+              height="11"
+              rx="3"
+            />
+            <circle
+              style="fill: var(--color-coral); stroke: none"
+              cx="22"
+              cy="28"
+              r="3"
+            />
+            <circle
+              style="fill: var(--color-azul); stroke: none"
+              cx="42"
+              cy="32"
+              r="2.5"
+            />
+          </g>
+        </symbol>
+        <symbol id="objeto-botella" viewBox="0 0 64 64">
+          <g
+            style="
+              stroke: var(--color-tinta);
+              stroke-width: 2.5;
+              stroke-linejoin: round;
+              stroke-linecap: round;
+            "
+          >
+            <rect
+              style="fill: var(--color-azul)"
+              x="24"
+              y="3"
+              width="16"
+              height="9"
+              rx="3"
+            />
+            <path
+              style="fill: var(--color-cielo)"
+              d="M26 12h12v5c6 2 9 6 9 11v26a6 6 0 0 1-6 6H23a6 6 0 0 1-6-6V28c0-5 3-9 9-11Z"
+            />
+            <path style="fill: var(--color-agua)" d="M17 36h30v12H17Z" />
+          </g>
+        </symbol>
+        <!-- Por debajo de la abertura, lo guardado solo se ve dentro del ancho del cuerpo. -->
+        <clipPath id="mochila-interior">
+          <path d="M-40-60H360V118H270V340H50V118H-40Z" />
+        </clipPath>
+      </defs>
+
+      <g #cuerpo class="cuerpo">
+        <!-- Asa, interior y bolsillos laterales quedan detrás del frente. -->
+        <path
+          class="relleno-oscuro asa"
+          d="M122 82V60a26 26 0 0 1 26-26h24a26 26 0 0 1 26 26v22"
+        />
+        <rect
+          class="relleno-oscuro"
+          x="48"
+          y="70"
+          width="224"
+          height="200"
+          rx="56"
+        />
+        <rect
+          class="relleno-oscuro"
+          x="22"
+          y="196"
+          width="36"
+          height="104"
+          rx="16"
+        />
+        <rect
+          class="relleno-oscuro"
+          x="262"
+          y="196"
+          width="36"
+          height="104"
+          rx="16"
+        />
+
+        <g clip-path="url(#mochila-interior)">
+          @for (objeto of objetos; track objeto.id) {
+            <g class="objeto" [class.dentro]="estaAlistado(objeto.id)">
+              <use
+                [attr.href]="'#objeto-' + objeto.id"
+                [attr.x]="objeto.x"
+                [attr.y]="objeto.y"
+                [attr.width]="objeto.tamano"
+                [attr.height]="objeto.tamano"
+                [attr.transform]="
+                  'rotate(' +
+                  objeto.giro +
+                  ' ' +
+                  (objeto.x + objeto.tamano / 2) +
+                  ' ' +
+                  (objeto.y + objeto.tamano / 2) +
+                  ')'
+                "
+              />
+            </g>
+          }
+        </g>
+
+        <!-- Frente: borde de arriba apenas arqueado, tirantes, bolsillo con cierre y el contador. -->
+        <path
+          class="relleno-frente"
+          d="M40 152q0-34 34-36 86-10 172 0 34 2 34 36v138a40 40 0 0 1-40 40H80a40 40 0 0 1-40-40Z"
+        />
+        <path class="brillo" d="M60 126q100-12 200 0" />
+        <rect
+          class="relleno-oscuro tirante"
+          x="92"
+          y="116"
+          width="18"
+          height="78"
+          rx="9"
+        />
+        <rect
+          class="relleno-oscuro tirante"
+          x="210"
+          y="116"
+          width="18"
+          height="78"
+          rx="9"
+        />
+        <rect class="hebilla" x="88" y="168" width="26" height="14" rx="4" />
+        <rect class="hebilla" x="206" y="168" width="26" height="14" rx="4" />
+
+        <rect
+          class="bolsillo"
+          x="76"
+          y="206"
+          width="168"
+          height="100"
+          rx="30"
+        />
+        <rect class="costura" x="84" y="214" width="152" height="84" rx="24" />
+        <path class="cierre" d="M100 232h120" />
+        <path class="jalador" d="M220 232v12" />
+        <text class="contador" x="160" y="288" text-anchor="middle">
+          {{ estaLista() ? "¡Lista!" : cantidad() + "/" + objetos.length }}
+        </text>
+      </g>
+
+      <!-- Destellos que aparecen cuando todo está dentro. -->
+      <path
+        class="destello"
+        style="--orden: 0"
+        d="M34 52l5 11 11 5-11 5-5 11-5-11-11-5 11-5Z"
+      />
+      <path
+        class="destello"
+        style="--orden: 1"
+        d="M290 74l4 9 9 4-9 4-4 9-4-9-9-4 9-4Z"
+      />
+      <path
+        class="destello"
+        style="--orden: 2"
+        d="M286 8l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"
+      />
+      <path
+        class="destello"
+        style="--orden: 3"
+        d="M20 150l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"
+      />
+    </svg>
+  </div>
+
+  <div class="grid content-start gap-5">
+    <div class="grid gap-2">
+      <h3 class="text-[clamp(1.4rem,2.4vw,1.75rem)]">
+        Para su mochila de verano
+      </h3>
+      <p class="text-tinta-suave">
+        Toca cada cosa que ya alistaste y mira cómo se va llenando la mochila.
+      </p>
+    </div>
+
+    <ul class="grid gap-2 sm:grid-cols-2">
+      @for (objeto of objetos; track objeto.id) {
+        <li>
+          <button
+            type="button"
+            class="objeto-mochila"
+            [attr.aria-pressed]="estaAlistado(objeto.id)"
+            (click)="alternar(objeto.id)"
+          >
+            <span class="objeto-check"><app-icono nombre="check" /></span>
+            <span class="flex-1">{{ objeto.texto }}</span>
+            <svg class="objeto-miniatura" aria-hidden="true">
+              <use [attr.href]="'#objeto-' + objeto.id" />
+            </svg>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <div
+      class="flex min-h-11 flex-wrap items-center justify-between gap-x-4 gap-y-2"
+    >
+      <p
+        class="font-semibold"
+        [class.text-turquesa-oscuro]="estaLista()"
+        aria-live="polite"
+      >
+        {{ estado() }}
+      </p>
+      @if (cantidad() > 0) {
+        <button type="button" class="vaciar" (click)="vaciar()">
+          Vaciar mochila
+        </button>
+      }
+    </div>
+  </div>
+</div>

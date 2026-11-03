@@ -1,0 +1,127 @@
+<section id="vacaciones" class="seccion franja-clara bg-mostaza" aria-labelledby="titulo-vacaciones">
+  <app-divisor class="text-mostaza" forma="olas" />
+  <app-fondo-dibujado class="text-white/80" [curva]="true" [garabatos]="garabatos" />
+  <app-siluetas-fondo class="text-white/35" [siluetas]="siluetas" />
+
+  <div class="contenedor relative grid gap-[clamp(72px,8vw,112px)]">
+    <div class="grid items-center gap-[clamp(48px,6vw,88px)] lg:grid-cols-12">
+      <div class="grid justify-items-start gap-7 lg:col-span-6">
+        <header class="encabezado-seccion mb-0" data-acequia="vacaciones">
+          <h2 id="titulo-vacaciones" appRevelar>Vacaciones <span class="resalte-recortado text-coral">divertidas</span>, todos los veranos</h2>
+          <p appRevelar="100">
+            Cada enero y febrero, mientras no hay clases, abrimos nuestras vacaciones útiles: semanas de arte, música,
+            cuentos y juego para que los más pequeños sigan aprendiendo y compartiendo, cerca de casa.
+          </p>
+        </header>
+
+        <!--
+          Calendario: tarjeta con anillos de espiral. Enero y febrero se llenan de mar al aparecer y sus
+          olas se mecen sin parar; el resto del año queda en reposo.
+        -->
+        <figure class="calendario" appRevelar="160">
+          <figcaption class="calendario-titulo">
+            <span class="calendario-sol"><app-icono nombre="sol" /></span>
+            Todos los años, en enero y febrero
+          </figcaption>
+          <ol class="meses">
+            @for (mes of meses; track mes.abreviatura; let i = $index) {
+              <li
+                class="mes"
+                [class.mes-verano]="mes.esVerano"
+                [style.--retraso-mes.ms]="350 + i * retrasoEntreMesesMs"
+                [attr.aria-label]="mes.esVerano ? mes.nombre + ', vacaciones de verano' : mes.nombre">
+                @if (mes.esVerano) {
+                  <span class="mar" aria-hidden="true">
+                    <span class="ola ola-fondo"></span>
+                    <span class="ola ola-frente"></span>
+                  </span>
+                }
+                <span class="mes-nombre" aria-hidden="true">{{ mes.abreviatura }}</span>
+              </li>
+            }
+          </ol>
+        </figure>
+
+        <dl class="grid w-full max-w-136 gap-2.5 sm:grid-cols-3" appRevelar="220">
+          @for (dato of datos; track dato.etiqueta) {
+            <!-- El ícono va dentro del <dt>: un <dl> solo admite <dt> y <dd> dentro de cada grupo. -->
+            <div class="dato-verano" [attr.data-tono]="dato.tono">
+              <dt class="dato-etiqueta">
+                <span class="dato-icono" aria-hidden="true"><app-icono [nombre]="dato.icono" /></span>
+                {{ dato.etiqueta }}
+              </dt>
+              <dd class="font-display text-[1.1rem] leading-tight font-extrabold">{{ dato.valor }}</dd>
+            </div>
+          }
+        </dl>
+
+        <div class="grid w-full gap-3" appRevelar="280">
+          <div class="flex flex-wrap gap-3">
+            <a class="boton w-full sm:w-auto" [href]="whatsapp" target="_blank" rel="noopener">
+              <app-icono nombre="whatsapp" /> Reservar cupo de verano
+            </a>
+            <a class="boton boton-suave w-full sm:w-auto" href="#matricula">
+              Ir a la matrícula <app-icono nombre="flecha" />
+            </a>
+          </div>
+          <p class="text-[0.95rem]">Las fechas, horarios y costos de cada temporada te los enviamos por WhatsApp.</p>
+        </div>
+      </div>
+
+      <!-- Collage: fotos tipo lámina superpuestas y un sello con la temporada. -->
+      <div class="relative aspect-square w-full sm:aspect-6/5 lg:col-span-6">
+        @for (foto of fotos; track foto.src; let i = $index) {
+          <div class="absolute" [ngClass]="foto.clases" [appRevelar]="i * retrasoPorFotoMs">
+            <figure class="lamina">
+              <img
+                [ngClass]="foto.proporcion"
+                [appAdaptable]="foto.src"
+                sizes="(min-width: 64rem) 340px, 60vw"
+                [alt]="foto.alt"
+                [width]="foto.ancho"
+                [height]="foto.alto"
+                loading="lazy"
+                decoding="async" />
+              <figcaption class="px-1 pt-2 pb-0.5 text-center text-[0.9rem] font-semibold text-tinta-suave max-sm:hidden">
+                {{ foto.leyenda }}
+              </figcaption>
+            </figure>
+          </div>
+        }
+
+        <div class="absolute right-[1%] bottom-0 z-4" [appRevelar]="fotos.length * retrasoPorFotoMs">
+          <div class="sello-temporada">
+            <span class="[--icono-tamano:22px] sm:[--icono-tamano:26px]"><app-icono nombre="calendario" /></span>
+            <span class="font-display text-[clamp(1.125rem,2.2vw,1.5rem)] leading-none font-extrabold whitespace-nowrap">Ene – Feb</span>
+            <span class="text-[0.8rem] leading-tight font-semibold sm:text-[0.85rem]">vacaciones útiles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ruta del verano: cada actividad es una nube de color que flota sobre un camino punteado. -->
+    <div class="grid gap-[clamp(28px,4vw,48px)]">
+      <h3 class="text-subtitulo" appRevelar>Lo que viven en el verano</h3>
+      <div class="relative">
+        <svg class="ruta-camino" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 30C100 -4 200 64 300 30S500 -4 600 30 800 64 1000 30" />
+        </svg>
+        <ol class="ruta">
+          @for (actividad of actividades; track actividad.nombre; let i = $index) {
+            <li class="parada-ruta" [appRevelar]="i * retrasoPorActividadMs">
+              <span class="parada-nube" [style.--orden]="i">
+                <span class="nube-icono" [ngClass]="actividad.color">
+                  <span class="nube-icono-simbolo"><app-icono [nombre]="actividad.icono" /></span>
+                </span>
+              </span>
+              <h4 class="text-[1.15rem]">{{ actividad.nombre }}</h4>
+              <p class="text-[0.98rem]">{{ actividad.texto }}</p>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+
+    <app-mochila appRevelar />
+  </div>
+</section>

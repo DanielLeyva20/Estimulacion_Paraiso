@@ -1,0 +1,49 @@
+<section id="espacios" class="seccion pb-[clamp(64px,8vw,112px)]" aria-labelledby="titulo-espacios">
+  <app-divisor class="text-crema" forma="ola" />
+  <app-siluetas-fondo [siluetas]="siluetas" />
+
+  <div class="contenedor relative">
+    <!-- En escritorio el título y la bajada van lado a lado, para no dejar media pantalla vacía. -->
+    <header
+      class="mb-[clamp(48px,6vw,80px)] grid items-end gap-x-[clamp(32px,5vw,80px)] gap-y-5 lg:grid-cols-2"
+      data-acequia="espacios">
+      <h2 id="titulo-espacios" appRevelar>Conoce el lugar antes de <span class="con-subrayado text-turquesa-oscuro">venir<app-garabato class="subrayado-titulo text-mostaza" forma="subrayado" /></span></h2>
+      <p class="max-w-xl text-[1.125em] text-tinta-suave" appRevelar="100">
+        Cada rincón de Mi Paraíso está pensado para que tu hijo explore con libertad y seguridad, y para que tú te
+        sientas como en casa.
+      </p>
+    </header>
+
+    <div class="grid gap-[clamp(64px,8vw,112px)]">
+      @for (espacio of espacios; track espacio.id; let invertido = $odd) {
+        <article
+          class="grid items-center gap-[clamp(36px,5vw,72px)] lg:grid-cols-12"
+          [attr.aria-labelledby]="'esp-' + espacio.id">
+          <app-visor-espacio
+            class="lg:col-span-7"
+            [class.lg:order-2]="invertido"
+            [espacio]="espacio"
+            [invertido]="invertido"
+            appRevelar />
+
+          <div class="grid gap-5 lg:col-span-5">
+            <h3 class="text-subtitulo" [id]="'esp-' + espacio.id" appRevelar>{{ espacio.nombre }}</h3>
+            <p class="max-w-136 text-tinta-suave" appRevelar="80">{{ espacio.resumen }}</p>
+            <ul class="mt-1 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              @for (detalle of espacio.detalles; track detalle.texto; let i = $index) {
+                <li class="flex items-start gap-3 leading-[1.4]" [appRevelar]="120 + i * retrasoPorDetalleMs">
+                  <span
+                    class="grid size-9 flex-none place-items-center rounded-full [--icono-tamano:19px]"
+                    [ngClass]="espacio.tema.icono">
+                    <app-icono [nombre]="detalle.icono" />
+                  </span>
+                  <span class="pt-1.5">{{ detalle.texto }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

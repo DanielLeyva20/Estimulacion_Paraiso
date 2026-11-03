@@ -1,0 +1,4 @@
+/* Fuera de pantalla las figuras se detienen: no tiene sentido animar lo que nadie ve. */
+:host(.en-pausa) app-silueta {
+  animation-play-state: paused;
+}

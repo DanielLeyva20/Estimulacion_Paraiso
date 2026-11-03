@@ -1,0 +1,275 @@
+/* ---------- Armador del taller ---------- */
+
+/* Tarjeta blanca con costura punteada y una cinta de colores arriba, como una ficha de tela. */
+.armador {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  padding: clamp(26px, 3vw, 42px);
+  border-radius: 32px;
+  background-color: var(--color-blanco);
+  box-shadow: var(--shadow-tarjeta);
+  outline: 2px dashed color-mix(in srgb, var(--color-coral) 40%, transparent);
+  outline-offset: -12px;
+}
+.armador::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 10px;
+  border-radius: 32px 32px 0 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-coral),
+    var(--color-mostaza),
+    var(--color-turquesa),
+    var(--color-agua),
+    var(--color-morado)
+  );
+}
+
+/* Encabezado de cada paso: número de color que pasa a check cuando el paso está completo. */
+.paso-armador {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.paso-numero {
+  --icono-tamano: 18px;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background-color: var(--color-coral);
+  color: var(--color-tinta);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+.paso-numero-2 {
+  background-color: var(--color-mostaza);
+}
+.paso-numero.listo {
+  background-color: var(--color-turquesa);
+  animation: saltito 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.paso-contador {
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--color-coral) 16%, var(--color-blanco));
+  color: var(--color-coral-oscuro);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  animation: saltito 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Temas: pastilla con su color; al elegirla se llena, el ícono gira y aparece un check. */
+.tema-armador {
+  position: relative;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 18px 6px 6px;
+  border-radius: 999px;
+  background-color: var(--color-blanco);
+  font-size: 0.98rem;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tono) 35%, transparent);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.25s var(--ease-suave),
+    box-shadow 0.25s var(--ease-suave),
+    translate 0.25s var(--ease-suave),
+    scale 0.15s ease-out;
+}
+.tema-icono {
+  --icono-tamano: 18px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--tono) 22%, var(--color-blanco));
+  transition:
+    background-color 0.25s var(--ease-suave),
+    scale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tema-check {
+  --icono-tamano: 12px;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background-color: var(--color-tinta);
+  color: var(--color-blanco);
+  scale: 0;
+  transition: scale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.tema-armador[aria-pressed='true'] {
+  background-color: color-mix(in srgb, var(--tono) 24%, var(--color-blanco));
+  box-shadow:
+    inset 0 0 0 2px var(--tono),
+    0 10px 18px -12px var(--tono);
+}
+.tema-armador[aria-pressed='true'] .tema-icono {
+  background-color: var(--tono);
+  scale: 1.08;
+  rotate: -10deg;
+}
+.tema-armador[aria-pressed='true'] .tema-check {
+  scale: 1;
+}
+.tema-armador:active {
+  scale: 0.96;
+}
+.tema-armador:focus-visible {
+  outline: 3px solid var(--color-tinta);
+  outline-offset: 3px;
+}
+
+/* Modalidades: fichas con ícono grande y un punto de selección que se llena con su color. */
+.modalidad-armador {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 22px;
+  background-color: var(--color-crema);
+  box-shadow: inset 0 0 0 2px transparent;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.25s var(--ease-suave),
+    box-shadow 0.25s var(--ease-suave),
+    translate 0.3s var(--ease-suave),
+    scale 0.15s ease-out;
+}
+.modalidad-icono {
+  --icono-tamano: 26px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--tono) 25%, var(--color-blanco));
+  transition:
+    background-color 0.25s var(--ease-suave),
+    rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modalidad-marca {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background-color: var(--color-blanco);
+  box-shadow: inset 0 0 0 2px rgb(19 34 43 / 0.25);
+  transition: box-shadow 0.25s var(--ease-suave);
+}
+.modalidad-marca::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: inherit;
+  background-color: var(--tono);
+  scale: 0;
+  transition: scale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modalidad-armador:has(:checked) {
+  background-color: color-mix(in srgb, var(--tono) 16%, var(--color-blanco));
+  box-shadow: inset 0 0 0 2.5px var(--tono);
+  translate: 0 -3px;
+}
+.modalidad-armador:has(:checked) .modalidad-marca {
+  box-shadow: inset 0 0 0 2px var(--tono);
+}
+.modalidad-armador:has(:checked) .modalidad-marca::after {
+  scale: 1;
+}
+.modalidad-armador:has(:checked) .modalidad-icono {
+  background-color: var(--tono);
+  animation: saltito 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modalidad-armador:active {
+  scale: 0.98;
+}
+.modalidad-armador:has(:focus-visible) {
+  outline: 3px solid var(--color-tinta);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tema-armador:hover {
+    translate: 0 -2px;
+  }
+  .tema-armador:hover .tema-icono {
+    scale: 1.1;
+    rotate: -12deg;
+  }
+  .modalidad-armador:not(:has(:checked)):hover {
+    background-color: var(--color-crema-2);
+  }
+  .modalidad-armador:hover .modalidad-icono {
+    rotate: -8deg;
+  }
+}
+
+@keyframes saltito {
+  from {
+    scale: 0.6;
+  }
+}
+
+/* ---------- Vista previa ---------- */
+
+/* Cada vez que cambia el último tema elegido, la foto nueva entra desenfocada y se asienta. */
+.foto-vista {
+  animation: asentar-foto 0.5s var(--ease-suave);
+}
+
+/* Las etiquetas de los temas elegidos brotan sobre la foto. */
+.etiqueta-tema {
+  animation: brotar-etiqueta 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes asentar-foto {
+  from {
+    opacity: 0;
+    scale: 1.06;
+    filter: blur(6px);
+  }
+}
+
+@keyframes brotar-etiqueta {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foto-vista,
+  .etiqueta-tema,
+  .paso-numero.listo,
+  .paso-contador,
+  .modalidad-armador:has(:checked) .modalidad-icono {
+    animation: none;
+  }
+}

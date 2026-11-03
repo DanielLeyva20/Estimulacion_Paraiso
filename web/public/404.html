@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es-PE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página no encontrada | Mi Paraíso</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#fff6e6">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <!-- Página independiente (sin Angular): la sirve el hosting para cualquier dirección que no existe. -->
+  <style>
+    :root {
+      --crema: #fff6e6;
+      --tinta: #13222b;
+      --tinta-suave: #465660;
+      --turquesa: #14b3a3;
+      --coral: #f4696a;
+      --mostaza: #f7b32b;
+      --morado: #6d4cc9;
+      --wa: #1f7a4d;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 40px 16px;
+      background: var(--crema);
+      color: var(--tinta);
+      font-family: 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      text-align: center;
+    }
+    main { display: grid; justify-items: center; gap: 22px; max-width: 34rem; }
+
+    /* "404" armado con las parcelas de colores del logo; la del medio es una nube perdida que flota. */
+    .numero { display: flex; align-items: center; gap: 10px; }
+    .numero span {
+      display: grid;
+      place-items: center;
+      width: clamp(76px, 22vw, 112px);
+      aspect-ratio: 4 / 5;
+      border-radius: 24px;
+      font: 800 clamp(3rem, 12vw, 4.5rem)/1 'M PLUS Rounded 1c', ui-rounded, system-ui, sans-serif;
+      box-shadow: 0 6px 0 rgb(19 34 43 / 0.14);
+    }
+    .numero span:nth-child(1) { background: var(--turquesa); rotate: -6deg; }
+    .numero span:nth-child(3) { background: var(--coral); rotate: 5deg; }
+    .nube { width: clamp(84px, 24vw, 120px); animation: flotar 3.6s ease-in-out infinite; }
+
+    h1 { font: 800 clamp(1.6rem, 5vw, 2.2rem)/1.15 'M PLUS Rounded 1c', ui-rounded, system-ui, sans-serif; }
+    p { color: var(--tinta-suave); font-size: 1.05rem; }
+
+    .acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .boton {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: scale 0.15s ease-out, background-color 0.2s ease-out;
+    }
+    .boton:active { scale: 0.97; }
+    .boton-principal { background: var(--wa); color: #fff; }
+    .boton-suave { background: #fff; color: var(--tinta); box-shadow: inset 0 0 0 1.5px rgb(19 34 43 / 0.16); }
+    .boton:focus-visible, .atajos a:focus-visible { outline: 3px solid var(--morado); outline-offset: 3px; }
+
+    .atajos { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; font-size: 0.95rem; }
+    .atajos a { color: var(--tinta); font-weight: 600; text-underline-offset: 3px; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .boton-principal:hover { background: #17633e; }
+      .boton-suave:hover { background: #fdebcb; }
+    }
+    @keyframes flotar { 50% { translate: 0 -10px; } }
+    @media (prefers-reduced-motion: reduce) { .nube { animation: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="numero" aria-hidden="true">
+      <span>4</span>
+      <svg class="nube" viewBox="0 0 120 84">
+        <path fill="#fffdf8" stroke="#13222b" stroke-width="3" stroke-linejoin="round"
+          d="M28 78a24 24 0 0 1-3-48 30 30 0 0 1 56-8 22 22 0 0 1 14 42 18 18 0 0 1-7 14Z" />
+        <circle cx="48" cy="50" r="4" fill="#13222b" />
+        <circle cx="74" cy="50" r="4" fill="#13222b" />
+        <path d="M52 62q9 7 18 0" fill="none" stroke="#13222b" stroke-width="3" stroke-linecap="round" />
+      </svg>
+      <span>4</span>
+    </div>
+
+    <h1>Esta página se fue a jugar a otro lado</h1>
+    <p>No encontramos lo que buscabas. Puede que el enlace esté mal escrito o que la página ya no exista.</p>
+
+    <div class="acciones">
+      <a class="boton boton-suave" href="/">Volver al inicio</a>
+      <a class="boton boton-principal" href="https://wa.me/51974987291" rel="noopener">Escríbenos por WhatsApp</a>
+    </div>
+
+    <nav class="atajos" aria-label="Secciones de la página">
+      <a href="/#programas">Programas</a>
+      <a href="/#vacaciones">Vacaciones útiles</a>
+      <a href="/#talleres">Talleres</a>
+      <a href="/#matricula">Matrícula</a>
+      <a href="/#ubicacion">Ubicación</a>
+    </nav>
+  </main>
+</body>
+</html>

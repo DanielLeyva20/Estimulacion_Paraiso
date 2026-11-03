@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T23:59:00+00:00",
+  "title": "Design System: Mi Paraíso",
+  "extensions": {
+    "colorMeta": {
+      "crema": {
+        "role": "neutral",
+        "displayName": "Warm Cream",
+        "canonical": "oklch(97.6% 0.023 82)",
+        "tonalRamp": [
+          "oklch(15% 0.023 82)",
+          "oklch(26% 0.023 82)",
+          "oklch(38% 0.023 82)",
+          "oklch(50% 0.023 82)",
+          "oklch(62% 0.023 82)",
+          "oklch(74% 0.023 82)",
+          "oklch(85% 0.023 82)",
+          "oklch(95% 0.023 82)"
+        ]
+      },
+      "crema-2": {
+        "role": "neutral",
+        "displayName": "Toasted Cream",
+        "canonical": "oklch(94.6% 0.046 82)",
+        "tonalRamp": [
+          "oklch(15% 0.046 82)",
+          "oklch(26% 0.046 82)",
+          "oklch(38% 0.046 82)",
+          "oklch(50% 0.046 82)",
+          "oklch(62% 0.046 82)",
+          "oklch(74% 0.046 82)",
+          "oklch(85% 0.046 82)",
+          "oklch(95% 0.046 82)"
+        ]
+      },
+      "blanco": {
+        "role": "neutral",
+        "displayName": "Cotton",
+        "canonical": "oklch(99.4% 0.007 89)",
+        "tonalRamp": [
+          "oklch(15% 0.007 89)",
+          "oklch(26% 0.007 89)",
+          "oklch(38% 0.007 89)",
+          "oklch(50% 0.007 89)",
+          "oklch(62% 0.007 89)",
+          "oklch(74% 0.007 89)",
+          "oklch(85% 0.007 89)",
+          "oklch(95% 0.007 89)"
+        ]
+      },
+      "turquesa": {
+        "role": "tertiary",
+        "displayName": "Acequia Turquoise",
+        "canonical": "oklch(69.0% 0.120 184)",
+        "tonalRamp": [
+          "oklch(15% 0.120 184)",
+          "oklch(26% 0.120 184)",
+          "oklch(38% 0.120 184)",
+          "oklch(50% 0.120 184)",
+          "oklch(62% 0.120 184)",
+          "oklch(74% 0.120 184)",
+          "oklch(85% 0.120 184)",
+          "oklch(95% 0.120 184)"
+        ]
+      },
+      "turquesa-oscuro": {
+        "role": "tertiary",
+        "displayName": "Deep Turquoise",
+        "canonical": "oklch(49.0% 0.086 182)",
+        "tonalRamp": [
+          "oklch(15% 0.086 182)",
+          "oklch(26% 0.086 182)",
+          "oklch(38% 0.086 182)",
+          "oklch(50% 0.086 182)",
+          "oklch(62% 0.086 182)",
+          "oklch(74% 0.086 182)",
+          "oklch(85% 0.086 182)",
+          "oklch(95% 0.086 182)"
+        ]
+      },
+      "coral": {
+        "role": "tertiary",
+        "displayName": "Camote Coral",
+        "canonical": "oklch(69.3% 0.172 22)",
+        "tonalRamp": [
+          "oklch(15% 0.160 22)",
+          "oklch(26% 0.160 22)",
+          "oklch(38% 0.160 22)",
+          "oklch(50% 0.160 22)",
+          "oklch(62% 0.160 22)",
+          "oklch(74% 0.160 22)",
+          "oklch(85% 0.160 22)",
+          "oklch(95% 0.160 22)"
+        ]
+      },
+      "coral-oscuro": {
+        "role": "tertiary",
+        "displayName": "Deep Coral",
+        "canonical": "oklch(51.6% 0.168 21)",
+        "tonalRamp": [
+          "oklch(15% 0.160 21)",
+          "oklch(26% 0.160 21)",
+          "oklch(38% 0.160 21)",
+          "oklch(50% 0.160 21)",
+          "oklch(62% 0.160 21)",
+          "oklch(74% 0.160 21)",
+          "oklch(85% 0.160 21)",
+          "oklch(95% 0.160 21)"
+        ]
+      },
+      "mostaza": {
+        "role": "tertiary",
+        "displayName": "Ripe Mustard",
+        "canonical": "oklch(81.0% 0.158 79)",
+        "tonalRamp": [
+          "oklch(15% 0.158 79)",
+          "oklch(26% 0.158 79)",
+          "oklch(38% 0.158 79)",
+          "oklch(50% 0.158 79)",
+          "oklch(62% 0.158 79)",
+          "oklch(74% 0.158 79)",
+          "oklch(85% 0.158 79)",
+          "oklch(95% 0.158 79)"
+        ]
+      },
+      "mostaza-oscuro": {
+        "role": "tertiary",
+        "displayName": "Deep Mustard",
+        "canonical": "oklch(46.4% 0.099 73)",
+        "tonalRamp": [
+          "oklch(15% 0.099 73)",
+          "oklch(26% 0.099 73)",
+          "oklch(38% 0.099 73)",
+          "oklch(50% 0.099 73)",
+          "oklch(62% 0.099 73)",
+          "oklch(74% 0.099 73)",
+          "oklch(85% 0.099 73)",
+          "oklch(95% 0.099 73)"
+        ]
+      },
+      "azul": {
+        "role": "tertiary",
+        "displayName": "Steel Blue",
+        "canonical": "oklch(50.8% 0.098 246)",
+        "tonalRamp": [
+          "oklch(15% 0.098 246)",
+          "oklch(26% 0.098 246)",
+          "oklch(38% 0.098 246)",
+          "oklch(50% 0.098 246)",
+          "oklch(62% 0.098 246)",
+          "oklch(74% 0.098 246)",
+          "oklch(85% 0.098 246)",
+          "oklch(95% 0.098 246)"
+        ]
+      },
+      "azul-oscuro": {
+        "role": "tertiary",
+        "displayName": "Deep Steel Blue",
+        "canonical": "oklch(40.9% 0.084 248)",
+        "tonalRamp": [
+          "oklch(15% 0.084 248)",
+          "oklch(26% 0.084 248)",
+          "oklch(38% 0.084 248)",
+          "oklch(50% 0.084 248)",
+          "oklch(62% 0.084 248)",
+          "oklch(74% 0.084 248)",
+          "oklch(85% 0.084 248)",
+          "oklch(95% 0.084 248)"
+        ]
+      },
+      "morado": {
+        "role": "tertiary",
+        "displayName": "Vine Purple",
+        "canonical": "oklch(52.0% 0.185 291)",
+        "tonalRamp": [
+          "oklch(15% 0.160 291)",
+          "oklch(26% 0.160 291)",
+          "oklch(38% 0.160 291)",
+          "oklch(50% 0.160 291)",
+          "oklch(62% 0.160 291)",
+          "oklch(74% 0.160 291)",
+          "oklch(85% 0.160 291)",
+          "oklch(95% 0.160 291)"
+        ]
+      },
+      "morado-oscuro": {
+        "role": "tertiary",
+        "displayName": "Deep Vine Purple",
+        "canonical": "oklch(41.4% 0.158 290)",
+        "tonalRamp": [
+          "oklch(15% 0.158 290)",
+          "oklch(26% 0.158 290)",
+          "oklch(38% 0.158 290)",
+          "oklch(50% 0.158 290)",
+          "oklch(62% 0.158 290)",
+          "oklch(74% 0.158 290)",
+          "oklch(85% 0.158 290)",
+          "oklch(95% 0.158 290)"
+        ]
+      },
+      "agua": {
+        "role": "secondary",
+        "displayName": "River Water",
+        "canonical": "oklch(63.2% 0.158 247)",
+        "tonalRamp": [
+          "oklch(15% 0.158 247)",
+          "oklch(26% 0.158 247)",
+          "oklch(38% 0.158 247)",
+          "oklch(50% 0.158 247)",
+          "oklch(62% 0.158 247)",
+          "oklch(74% 0.158 247)",
+          "oklch(85% 0.158 247)",
+          "oklch(95% 0.158 247)"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Furrow Ink",
+        "canonical": "oklch(24.3% 0.027 236)",
+        "tonalRamp": [
+          "oklch(15% 0.027 236)",
+          "oklch(26% 0.027 236)",
+          "oklch(38% 0.027 236)",
+          "oklch(50% 0.027 236)",
+          "oklch(62% 0.027 236)",
+          "oklch(74% 0.027 236)",
+          "oklch(85% 0.027 236)",
+          "oklch(95% 0.027 236)"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Soft Furrow Ink",
+        "canonical": "oklch(44.3% 0.026 236)",
+        "tonalRamp": [
+          "oklch(15% 0.026 236)",
+          "oklch(26% 0.026 236)",
+          "oklch(38% 0.026 236)",
+          "oklch(50% 0.026 236)",
+          "oklch(62% 0.026 236)",
+          "oklch(74% 0.026 236)",
+          "oklch(85% 0.026 236)",
+          "oklch(95% 0.026 236)"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error Red",
+        "canonical": "oklch(51.6% 0.168 21)",
+        "tonalRamp": [
+          "oklch(15% 0.160 21)",
+          "oklch(26% 0.160 21)",
+          "oklch(38% 0.160 21)",
+          "oklch(50% 0.160 21)",
+          "oklch(62% 0.160 21)",
+          "oklch(74% 0.160 21)",
+          "oklch(85% 0.160 21)",
+          "oklch(95% 0.160 21)"
+        ]
+      },
+      "wa": {
+        "role": "primary",
+        "displayName": "WhatsApp Field Green",
+        "canonical": "oklch(51.5% 0.110 157)",
+        "tonalRamp": [
+          "oklch(15% 0.110 157)",
+          "oklch(26% 0.110 157)",
+          "oklch(38% 0.110 157)",
+          "oklch(50% 0.110 157)",
+          "oklch(62% 0.110 157)",
+          "oklch(74% 0.110 157)",
+          "oklch(85% 0.110 157)",
+          "oklch(95% 0.110 157)"
+        ]
+      },
+      "wa-hover": {
+        "role": "primary",
+        "displayName": "Shaded Field Green",
+        "canonical": "oklch(44.4% 0.095 157)",
+        "tonalRamp": [
+          "oklch(15% 0.095 157)",
+          "oklch(26% 0.095 157)",
+          "oklch(38% 0.095 157)",
+          "oklch(50% 0.095 157)",
+          "oklch(62% 0.095 157)",
+          "oklch(74% 0.095 157)",
+          "oklch(85% 0.095 157)",
+          "oklch(95% 0.095 157)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only, white over the ink veil; three lines enter from a blur; clamp(2.6rem, 12vw, 3.6rem) on phones."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Large figures set inside field plots, such as 0–3."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles (h2); inherit the band color."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Space, step and form titles (h3)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text; never below 17px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Plot labels, data terms, field help and errors; sentence case."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sombra",
+        "value": "0 18px 40px -22px rgb(19 34 43 / 0.35), 0 4px 10px -6px rgb(19 34 43 / 0.18)",
+        "purpose": "Opened FAQ item."
+      },
+      {
+        "name": "tarjeta",
+        "value": "0 30px 60px -30px rgb(19 34 43 / 0.55), 0 8px 18px -10px rgb(19 34 43 / 0.3)",
+        "purpose": "Cotton form card lifted off a dark band; the map card in ubicación."
+      },
+      {
+        "name": "boton",
+        "value": "0 10px 22px -12px rgb(31 122 77 / 0.7)",
+        "purpose": "Primary WhatsApp button at rest."
+      },
+      {
+        "name": "boton-hover",
+        "value": "0 16px 28px -14px rgb(31 122 77 / 0.75)",
+        "purpose": "Primary button on fine-pointer hover, with a 2px lift."
+      },
+      {
+        "name": "flotante",
+        "value": "0 14px 30px -12px rgb(31 122 77 / 0.65), 0 4px 10px -4px rgb(19 34 43 / 0.25)",
+        "purpose": "Floating WhatsApp button."
+      },
+      {
+        "name": "etiqueta",
+        "value": "0 6px 14px -8px rgb(19 34 43 / 0.4)",
+        "purpose": "Cotton labels on photo plots, the mustard matrícula badge, the map zoom control."
+      },
+      {
+        "name": "menu",
+        "value": "0 20px 30px -24px rgb(19 34 43 / 0.45)",
+        "purpose": "Open mobile menu panel."
+      },
+      {
+        "name": "header-hairline",
+        "value": "0 1px 0 rgb(19 34 43 / 0.08)",
+        "purpose": "Header once scrolled, over 90% cream glass."
+      },
+      {
+        "name": "marcador",
+        "value": "0 10px 18px -8px rgb(19 34 43 / 0.55)",
+        "purpose": "Coral teardrop map marker."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-suave",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Settle ease for every transition and reveal."
+      },
+      {
+        "name": "press",
+        "value": "200ms; scale(0.97) on :active",
+        "purpose": "Buttons, chips and option cards; hover only under (hover: hover) and (pointer: fine)."
+      },
+      {
+        "name": "revelar",
+        "value": "opacity + translateY(18px), 0.9s; plots translateY(28px) 1.1s, photo scale(1.14) to 1 over 1.8s",
+        "purpose": "Scroll reveal, staggered via --retraso."
+      },
+      {
+        "name": "meses",
+        "value": "clip-path inset(0 100% 0 0) to inset(0), 700ms, staggered from 350ms",
+        "purpose": "Summer months fill with turquoise on reveal."
+      },
+      {
+        "name": "trazo",
+        "value": "1.4s, 0.6s delay",
+        "purpose": "Hand-drawn coral underline under the mustard hero word."
+      },
+      {
+        "name": "brillo",
+        "value": "2.4s linear infinite",
+        "purpose": "Glint flowing along the acequia."
+      },
+      {
+        "name": "onda",
+        "value": "2.8s, 1s delay, infinite",
+        "purpose": "Ripple around the floating WhatsApp button."
+      },
+      {
+        "name": "abrir",
+        "value": "0.5s from translateY(-6px)",
+        "purpose": "FAQ answer opening."
+      },
+      {
+        "name": "aparecer",
+        "value": "0.25s from translateY(-4px)",
+        "purpose": "Field errors and form success state."
+      },
+      {
+        "name": "entrar-linea",
+        "value": "0.9s, from translateY(0.35em) + blur(8px), 110ms per line after 120ms",
+        "purpose": "Hero headline lines entering in sequence."
+      },
+      {
+        "name": "deslizar-ola",
+        "value": "22s linear infinite, translateX(-1440 units)",
+        "purpose": "Back wave of the olas section edge."
+      },
+      {
+        "name": "view-transition",
+        "value": "group 450ms ease-suave; old/new 260ms; root none",
+        "purpose": "Gallery photos moving and fading when a filter changes."
+      },
+      {
+        "name": "descubrir",
+        "value": "clip-path inset(24% 0 0 0) to inset(0), 1s",
+        "purpose": "Gallery photos uncovering upward on scroll reveal."
+      },
+      {
+        "name": "visor",
+        "value": "220ms fade, photo scale 0.96 to 1 over 260ms via @starting-style",
+        "purpose": "Gallery lightbox opening."
+      },
+      {
+        "name": "onda-marcador",
+        "value": "2.4s infinite, 0 to 18px coral ring",
+        "purpose": "Pulse around the map marker."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The WhatsApp action: green pill with the WhatsApp mark; the only use of green.",
+      "html": "<a class=\"ds-btn\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.29Z\"/></svg> Agenda una visita</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 24px; border-radius: 999px; background: var(--color-wa, #1f7a4d); color: #fff; font-family: 'Onest', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.2; font-weight: 600; text-decoration: none; box-shadow: 0 10px 22px -12px rgb(31 122 77 / 0.7); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), translate 200ms cubic-bezier(0.16, 1, 0.3, 1), scale 200ms cubic-bezier(0.16, 1, 0.3, 1); user-select: none; cursor: pointer; } .ds-btn:active { scale: 0.97; } .ds-btn:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; } @media (hover: hover) and (pointer: fine) { .ds-btn:hover { background: var(--color-wa-hover, #17633e); translate: 0 -2px; box-shadow: 0 16px 28px -14px rgb(31 122 77 / 0.75); } .ds-btn:active { translate: 0 0; } }"
+    },
+    {
+      "name": "Soft Button",
+      "kind": "button",
+      "refersTo": "button-soft",
+      "description": "Secondary in-page navigation: transparent pill with an ink ring.",
+      "html": "<a class=\"ds-btn-soft\" href=\"#\">Recorre los espacios <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn-soft { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 24px; border-radius: 999px; background: transparent; color: var(--color-tinta, #13222b); font-family: 'Onest', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.2; font-weight: 600; text-decoration: none; box-shadow: inset 0 0 0 1.5px rgb(19 34 43 / 0.3); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), scale 200ms cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; } .ds-btn-soft:active { scale: 0.97; } .ds-btn-soft:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; } @media (hover: hover) and (pointer: fine) { .ds-btn-soft:hover { background: var(--color-blanco, #fffdf8); box-shadow: inset 0 0 0 1.5px rgb(19 34 43 / 0.55); } }"
+    },
+    {
+      "name": "Form Field",
+      "kind": "input",
+      "refersTo": "field-input",
+      "description": "Label above a large cream control; River Water inset on focus, red ring and message on error.",
+      "html": "<div class=\"ds-campo\"><label class=\"ds-campo-etiqueta\" for=\"ds-n\">Nombre completo</label><input class=\"ds-campo-control\" id=\"ds-n\" placeholder=\"Nombres y apellidos\" /><p class=\"ds-campo-ayuda\">Como figura en su DNI.</p></div>",
+      "css": ".ds-campo { display: grid; gap: 8px; max-width: 420px; font-family: 'Onest', system-ui, sans-serif; color: var(--color-tinta, #13222b); } .ds-campo-etiqueta { font-size: 0.95rem; line-height: 1.3; font-weight: 600; } .ds-campo-control { min-height: 52px; width: 100%; box-sizing: border-box; border: 0; border-radius: 14px; background: var(--color-crema, #fff6e6); padding: 12px 16px; font: inherit; font-size: 1.0625rem; color: inherit; box-shadow: inset 0 0 0 1.5px rgb(19 34 43 / 0.18); transition: box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-campo-control::placeholder { color: rgb(70 86 96 / 0.8); } .ds-campo-control:focus { outline: none; background: var(--color-blanco, #fffdf8); box-shadow: inset 0 0 0 2px var(--color-agua, #1a8fe3); } .ds-campo-control[aria-invalid='true'] { background: #fff1f0; box-shadow: inset 0 0 0 2px var(--color-error, #b4303a); } .ds-campo-ayuda { margin: 0; font-size: 0.875rem; line-height: 1.4; color: var(--color-tinta-suave, #465660); }"
+    },
+    {
+      "name": "Toggle Chip",
+      "kind": "chip",
+      "refersTo": "chip-toggle",
+      "description": "Multi-select chips on the coral taller builder; pressed fills with ink.",
+      "html": "<div class=\"ds-chips\"><button type=\"button\" class=\"ds-chip\" aria-pressed=\"true\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m5 12.5 4.5 4.5L19 7.5\"/></svg> Arte y pintura</button><button type=\"button\" class=\"ds-chip\" aria-pressed=\"false\">Música</button></div>",
+      "css": ".ds-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 24px; border-radius: 22px; background: var(--color-coral, #f4696a); } .ds-chip { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.35); color: var(--color-tinta, #13222b); font-family: 'Onest', system-ui, sans-serif; font-size: 0.98rem; font-weight: 600; box-shadow: inset 0 0 0 1.5px rgb(19 34 43 / 0.22); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), scale 200ms cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; } .ds-chip:active { scale: 0.97; } .ds-chip[aria-pressed='true'] { background: var(--color-tinta, #13222b); color: #fff; box-shadow: none; } .ds-chip:focus-visible { outline: 3px solid var(--color-tinta, #13222b); outline-offset: 3px; } @media (hover: hover) and (pointer: fine) { .ds-chip[aria-pressed='false']:hover { background: rgb(255 255 255 / 0.6); } }"
+    },
+    {
+      "name": "Field Plot",
+      "kind": "card",
+      "refersTo": "plot",
+      "description": "The parcela: a 22px vivid color field with furrow texture and content anchored to the bottom.",
+      "html": "<div class=\"ds-plot\"><span class=\"ds-plot-cifra\">0–3</span><span class=\"ds-plot-texto\">años · bebés y primera infancia</span></div>",
+      "css": ".ds-plot { position: relative; overflow: hidden; display: grid; align-content: end; width: 240px; height: 200px; padding: 18px; border-radius: 22px; background: var(--color-turquesa, #14b3a3); color: var(--color-tinta, #13222b); font-family: 'Onest', system-ui, sans-serif; } .ds-plot::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(172deg, transparent 0 13px, rgb(19 34 43 / 0.07) 13px 15px); } .ds-plot-cifra { font-family: 'M PLUS Rounded 1c', 'Onest', sans-serif; font-size: 3.25rem; line-height: 1; font-weight: 800; letter-spacing: -0.03em; } .ds-plot-texto { font-size: 0.9rem; line-height: 1.35; font-weight: 500; }"
+    },
+    {
+      "name": "Step Field",
+      "kind": "card",
+      "refersTo": "step-numeral",
+      "description": "Numbered step on a dark field: cotton numeral with a halo, white text per the Band and Its Ink Rule.",
+      "html": "<div class=\"ds-paso\"><span class=\"ds-paso-num\">1</span><h3>Escríbenos por WhatsApp</h3><p>Cuéntanos la edad de tu hijo y qué te interesa.</p></div>",
+      "css": ".ds-paso { position: relative; display: grid; gap: 10px; max-width: 320px; padding: 96px 32px 32px; border-radius: 22px; background: var(--color-azul, #2f6a9a); color: #fff; font-family: 'Onest', system-ui, sans-serif; } .ds-paso h3 { margin: 0; font-family: 'M PLUS Rounded 1c', 'Onest', sans-serif; font-weight: 700; font-size: 1.5rem; line-height: 1.12; letter-spacing: -0.02em; } .ds-paso p { margin: 0; line-height: 1.6; color: rgb(255 255 255 / 0.88); } .ds-paso-num { position: absolute; top: 28px; left: 32px; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 999px; background: var(--color-blanco, #fffdf8); color: var(--color-tinta, #13222b); font-family: 'M PLUS Rounded 1c', 'Onest', sans-serif; font-size: 1.25rem; font-weight: 800; box-shadow: 0 0 0 6px rgb(255 253 248 / 0.35); }"
+    },
+    {
+      "name": "FAQ Item",
+      "kind": "custom",
+      "refersTo": "faq-item",
+      "description": "Cotton details/summary with a coral plus disc that rotates open; gains the open-card shadow.",
+      "html": "<details class=\"ds-faq\" open><summary><span>¿Desde qué edad pueden venir?</span><span class=\"ds-faq-mas\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></span></summary><p>Recibimos bebés desde los primeros meses hasta los 3 años.</p></details>",
+      "css": ".ds-faq { max-width: 520px; border-radius: 14px; background: var(--color-blanco, #fffdf8); color: var(--color-tinta, #13222b); font-family: 'Onest', system-ui, sans-serif; transition: box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-faq[open] { box-shadow: 0 18px 40px -22px rgb(19 34 43 / 0.35), 0 4px 10px -6px rgb(19 34 43 / 0.18); } .ds-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 22px; list-style: none; cursor: pointer; font-size: 1.0625rem; line-height: 1.4; font-weight: 600; border-radius: 14px; } .ds-faq summary::-webkit-details-marker { display: none; } .ds-faq summary:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; } .ds-faq-mas { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 999px; background: var(--color-coral, #f4696a); transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-faq[open] .ds-faq-mas { transform: rotate(45deg); } .ds-faq p { margin: 0; max-width: 60ch; padding: 0 22px 22px; line-height: 1.6; color: var(--color-tinta-suave, #465660); }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Links inherit the header color (white over the video, ink on cream glass) at 85% opacity, with a coral underline that grows from the left on hover.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Espacios</a><a href=\"#\">Programas</a><a href=\"#\">Vacaciones</a><a href=\"#\">Matrícula</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 28px; padding: 16px 24px; background: rgb(255 246 230 / 0.9); color: var(--color-tinta, #13222b); box-shadow: 0 1px 0 rgb(19 34 43 / 0.08); font-family: 'Onest', system-ui, sans-serif; font-size: 0.98rem; font-weight: 500; } .ds-nav a { position: relative; padding: 8px 2px; color: inherit; opacity: 0.85; text-decoration: none; transition: opacity 200ms; } .ds-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px; border-radius: 2px; background: var(--color-coral, #f4696a); transform: scaleX(0); transform-origin: left; transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav a:hover { opacity: 1; } .ds-nav a:hover::after { transform: scaleX(1); } .ds-nav a:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; border-radius: 8px; }"
+    },
+    {
+      "name": "Floating WhatsApp",
+      "kind": "button",
+      "refersTo": "whatsapp-float",
+      "description": "60px green pill fixed bottom-right with a slow outward ripple.",
+      "html": "<a class=\"ds-flotante\" href=\"#\"><span class=\"ds-onda\"></span><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91A9.85 9.85 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.29Z\"/></svg><span class=\"ds-flotante-texto\">¿Hablamos?</span></a>",
+      "css": ".ds-flotante { position: relative; display: inline-flex; align-items: center; gap: 10px; height: 60px; padding: 0 22px 0 18px; border-radius: 999px; background: var(--color-wa, #1f7a4d); color: #fff; font-family: 'Onest', system-ui, sans-serif; font-weight: 600; text-decoration: none; box-shadow: 0 14px 30px -12px rgb(31 122 77 / 0.65), 0 4px 10px -4px rgb(19 34 43 / 0.25); transition: background-color 600ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-flotante svg, .ds-flotante-texto { position: relative; } .ds-flotante svg { width: 26px; height: 26px; } .ds-onda { position: absolute; inset: 0; border-radius: inherit; animation: ds-onda 2.8s cubic-bezier(0.16, 1, 0.3, 1) 1s infinite; } @keyframes ds-onda { 0% { box-shadow: 0 0 0 0 rgb(31 122 77 / 0.5); } 70%, 100% { box-shadow: 0 0 0 16px rgb(31 122 77 / 0); } } .ds-flotante:hover { background: var(--color-wa-hover, #17633e); } .ds-flotante:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; }"
+    },
+    {
+      "name": "Light Button",
+      "kind": "button",
+      "refersTo": "button-light",
+      "description": "Secondary action on ink or video: translucent white pill with a white ring; fills cotton on hover.",
+      "html": "<div class=\"ds-oscuro\"><a class=\"ds-btn-claro\" href=\"#\">Recorre los espacios <svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a></div>",
+      "css": ".ds-oscuro { padding: 32px; border-radius: 22px; background: var(--color-tinta, #13222b); } .ds-btn-claro { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 24px; border-radius: 999px; background: rgb(255 255 255 / 0.1); color: #fff; font-family: 'Onest', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.2; font-weight: 600; text-decoration: none; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.6); backdrop-filter: blur(4px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms cubic-bezier(0.16, 1, 0.3, 1), scale 200ms cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; } .ds-btn-claro:active { scale: 0.97; } .ds-btn-claro:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; } @media (hover: hover) and (pointer: fine) { .ds-btn-claro:hover { background: var(--color-blanco, #fffdf8); color: var(--color-tinta, #13222b); box-shadow: none; } }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "Gallery category filters on the purple band; pressed fills mustard with ink text; count after the name.",
+      "html": "<div class=\"ds-filtros\" role=\"group\" aria-label=\"Filtrar fotos\"><button type=\"button\" class=\"ds-filtro\" aria-pressed=\"true\">Todas <span>24</span></button><button type=\"button\" class=\"ds-filtro\" aria-pressed=\"false\">Talleres <span>8</span></button><button type=\"button\" class=\"ds-filtro\" aria-pressed=\"false\">Vacaciones <span>6</span></button></div>",
+      "css": ".ds-filtros { display: flex; flex-wrap: wrap; gap: 8px; padding: 24px; border-radius: 22px; background: var(--color-morado, #6d4cc9); } .ds-filtro { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 999px; background: rgb(255 255 255 / 0.1); color: #fff; font-family: 'Onest', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.28); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), scale 200ms cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; } .ds-filtro span { font-size: 0.8rem; opacity: 0.7; font-variant-numeric: tabular-nums; } .ds-filtro:active { scale: 0.96; } .ds-filtro[aria-pressed='true'] { background: var(--color-mostaza, #f7b32b); color: var(--color-tinta, #13222b); box-shadow: none; } .ds-filtro:focus-visible { outline: 3px solid var(--color-agua, #1a8fe3); outline-offset: 3px; } @media (hover: hover) and (pointer: fine) { .ds-filtro[aria-pressed='false']:hover { background: rgb(255 255 255 / 0.2); } }"
+    },
+    {
+      "name": "Section Edge",
+      "kind": "custom",
+      "refersTo": "divisor",
+      "description": "Full-width wave cut in the next section's own ground (currentColor), overlapping the section above; the olas back layer slides slowly.",
+      "html": "<div class=\"ds-borde\"><div class=\"ds-borde-arriba\"></div><div class=\"ds-borde-abajo\"><svg class=\"ds-divisor\" viewBox=\"0 0 1440 100\" preserveAspectRatio=\"none\" fill=\"currentColor\" aria-hidden=\"true\"><path class=\"ds-ola-fondo\" opacity=\"0.45\" d=\"M0 46C360 96 1080 -4 1440 46S2520 -4 2880 46V100H0Z\"/><path d=\"M0 70C300 30 560 96 860 64s420-40 580-14V100H0Z\"/></svg></div></div>",
+      "css": ".ds-borde { width: 100%; max-width: 560px; overflow: hidden; border-radius: 22px; } .ds-borde-arriba { height: 120px; background: var(--color-crema, #fff6e6); } .ds-borde-abajo { position: relative; height: 120px; background: var(--color-mostaza, #f7b32b); color: var(--color-mostaza, #f7b32b); } .ds-divisor { position: absolute; left: 0; right: 0; bottom: 100%; display: block; width: 100%; height: 64px; translate: 0 1px; } .ds-ola-fondo { animation: ds-deslizar 22s linear infinite; } @keyframes ds-deslizar { to { transform: translateX(-1440px); } } @media (prefers-reduced-motion: reduce) { .ds-ola-fondo { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Valley in Plots",
+    "overview": "The center is seen from above as a small irrigated valley. Every space and program is a parcela: a flat field of vivid color or a whole photograph, cut with the same soft 22px corner and laid on one module grid with narrow furrow gaps between plots. The page opens on the real place: a full-viewport video of the center under a deep ink veil, with the headline in white. From the foot of that video a river-blue channel, the acequia, is drawn from the live layout down the left gutter and stops beside each section heading, so the visitor is carried from one field to the next instead of scrolling past a stack of cards.\n\nThe ground is warm cream, never white. On it the valley is planted in strong, saturated color: turquoise, coral, mustard, steel blue and purple. Color arrives at two scales: as plots inside mosaics, and as full-bleed bands where a whole section is one field (vacaciones in mustard, galería in purple, confianza in turquoise, matrícula in steel blue), and each section meets the one before it along a soft field edge (a wave, a curve, a row of scallops or a line of hills) cut in its own ground color. Light fields carry deep ink text; dark fields carry white. Depth comes from color fields and fine diagonal furrow texture, with soft ambient shadow reserved for things that float or open. Type is rounded and heavy in headings (M PLUS Rounded 1c 800) and calm, generous and highly legible in body (Onest at 17 to 19px, line-height 1.6), because the readers are tired parents on phones.\n\nMotion is slow and settling: the hero headline arrives line by line out of a blur, content rises 18px into place, photo plots unscale from 1.14 inside their frame, water advances along the channel with scroll, summer months fill with turquoise from left to right, gallery photos uncover upward and glide to new places when filtered, the back wave of a double edge drifts sideways. Presses answer in 200ms with a slight shrink. Everything collapses to still under reduced motion.",
+    "keyCharacteristics": [
+      "Vivid field plots with a shared 22px radius on one grid, separated by a fluid furrow gap.",
+      "Full-bleed color bands alternate with cream sections; each band sets its own text color and supporting-text color, and each section owns the shaped edge above it.",
+      "On turquoise, coral and mustard, text is ink; on steel blue and purple, text is white.",
+      "WhatsApp green belongs only to the WhatsApp action; river blue only to water and focus.",
+      "Rounded heavy display type over a quiet, roomy Onest body."
+    ],
+    "rules": [
+      {
+        "name": "The Band and Its Ink Rule",
+        "body": "Turquoise, coral and mustard take Furrow Ink text (6.2, 5.5 and 8.9:1); steel blue, purple and the Furrow Ink grounds (hero veil, footer) take white (5.8 and 6.0:1 on the fields). Never the reverse. A full-bleed band declares itself light or dark, and that choice sets both the text color and the supporting-text color (Furrow Ink on light bands, white at 88% on dark bands). Soft Furrow Ink belongs to cream and cotton only.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Green Rule",
+        "body": "WhatsApp Field Green appears only on the WhatsApp action. No other element, field or icon uses it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Water Is Water Rule",
+        "body": "River Water marks only water and focus: the acequia, the logo's river line, focus rings. It is never a plot fill, a band or a section edge.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Small Print Rule",
+        "body": "Nothing a parent needs to read goes below 0.875rem; body never drops below 17px; form controls hold 1.0625rem.",
+        "section": "typography"
+      },
+      {
+        "name": "The Balanced Heading Rule",
+        "body": "Headings use text-wrap: balance and paragraphs text-wrap: pretty; headings are sentence case, inherit the band's color, and are never preceded by a kicker or eyebrow line.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flush Field Rule",
+        "body": "Plots and bands never cast shadows. If something needs separation from a field, it becomes cotton on the field, or another plot set behind it, not a lifted field.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do build every new space or offer as a plot: 22px radius, on the module grid, furrow gap between neighbors.",
+      "Do put Furrow Ink on turquoise, coral and mustard, and white on steel blue and purple; mark full-bleed bands as light or dark so supporting text follows.",
+      "Do put cotton cards on bands when a section needs forms or dense reading, at 22px or 32px radius.",
+      "Do keep the WhatsApp action in WhatsApp Field Green, pill-shaped, with the WhatsApp mark, and keep it reachable on every screen.",
+      "Do keep hover effects inside `(hover: hover) and (pointer: fine)` and answer every press with a 200ms scale(0.97).",
+      "Do keep body text at 17px or more with 1.6 line-height, and form controls at 52px and 1.0625rem.",
+      "Do open each section that changes ground with an `app-divisor` filled in that section's own background, mirrored when the same shape came just before.",
+      "Do use the light button and white glass controls on ink or video, and the soft button on cream.",
+      "Do honor prefers-reduced-motion: reveals, water, sliding waves, headline blur, view transitions and wipes become still, and the hero video never autoplays."
+    ],
+    "donts": [
+      "Don't return to pastel tints; fields are the saturated values in the palette, at full strength.",
+      "Don't set white text on turquoise, coral or mustard, or ink text on steel blue or purple.",
+      "Don't use Soft Furrow Ink on a vivid band; use the band's supporting-text color.",
+      "Don't put WhatsApp green on anything that is not the WhatsApp action, or River Water on a fill.",
+      "Don't add shadows to plots or bands, or use hard offset shadows; shadows are soft, ambient and only for floating, opened or carded elements.",
+      "Don't use blob shapes, cartoon clouds, or rows of identical icon cards; fields differ in size and fill. Curved silhouettes live only on full-width section edges.",
+      "Don't use pure black anywhere or solid pure white as a surface; the lightest surface is cotton. White appears only as text on dark fields, ink and green, as translucent fills and glass on bands and video, and as the acequia glint.",
+      "Don't place a kicker or eyebrow line above a heading, and don't uppercase labels."
+    ]
+  }
+}

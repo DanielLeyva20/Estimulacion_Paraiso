@@ -1,0 +1,49 @@
+/*
+ * Confeti: puntitos claros y oscuros esparcidos sobre la franja, en tres tamaños con distinto
+ * espaciado para que no se vea como una cuadrícula. Se suma al color de fondo de cada programa.
+ */
+.franja-programa {
+  background-image:
+    radial-gradient(circle, rgb(255 255 255 / 0.24) 3px, transparent 3.5px),
+    radial-gradient(circle, rgb(255 255 255 / 0.14) 2px, transparent 2.5px),
+    radial-gradient(circle, rgb(19 34 43 / 0.07) 4px, transparent 4.5px);
+  background-position:
+    20px 30px,
+    64px 12px,
+    110px 150px;
+  background-size:
+    140px 140px,
+    90px 90px,
+    220px 220px;
+}
+
+/* "Lo que desarrolla": pastillas blancas con un punto de color que van rotando de tono. */
+.area-programa {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px 8px 12px;
+  border-radius: 999px;
+  background-color: var(--color-blanco);
+  color: var(--color-tinta);
+  font-weight: 600;
+  box-shadow: 0 8px 16px -12px rgb(19 34 43 / 0.5);
+  transition:
+    translate 0.25s var(--ease-suave),
+    rotate 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.area-programa::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: var(--tono);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tono) 25%, transparent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .area-programa:hover {
+    translate: 0 -3px;
+    rotate: -2deg;
+  }
+}

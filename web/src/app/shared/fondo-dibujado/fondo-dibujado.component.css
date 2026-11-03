@@ -1,0 +1,93 @@
+:host {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ondas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.onda-clara {
+  fill: rgb(255 255 255 / 0.1);
+}
+.onda-oscura {
+  fill: rgb(19 34 43 / 0.06);
+}
+
+/* Halo claro detrás del título: hace que el texto resalte sobre el color de la sección. */
+.halo {
+  position: absolute;
+  top: 4%;
+  left: -6%;
+  width: min(70vw, 760px);
+  aspect-ratio: 1.4;
+  background: radial-gradient(closest-side, rgb(255 255 255 / 0.32), transparent);
+}
+
+/* Trazos punteados que avanzan despacio, como si el avión siguiera volando. */
+.rastro {
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-dasharray: 8 10;
+  animation: avanzar 1.6s linear infinite;
+}
+
+.vuelo {
+  position: absolute;
+  top: clamp(16px, 4vw, 48px);
+  right: 4%;
+  width: clamp(180px, 24vw, 340px);
+  overflow: visible;
+}
+.avion {
+  fill: rgb(255 255 255 / 0.95);
+  stroke: var(--color-tinta);
+  stroke-width: 2.2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: planear 4s ease-in-out infinite;
+}
+
+.curva {
+  position: absolute;
+  bottom: 6%;
+  left: 52%;
+  width: clamp(200px, 22vw, 320px);
+  overflow: visible;
+}
+
+@keyframes avanzar {
+  to {
+    stroke-dashoffset: -18;
+  }
+}
+@keyframes planear {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(4px, -6px) rotate(-4deg);
+  }
+}
+
+@media (max-width: 64rem) {
+  .vuelo {
+    width: 160px;
+    opacity: 0.8;
+  }
+  .curva {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rastro,
+  .avion {
+    animation: none;
+  }
+}

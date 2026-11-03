@@ -1,0 +1,44 @@
+<section id="como-empezar" class="seccion" aria-labelledby="titulo-pasos">
+  <app-divisor class="text-crema" forma="festones" />
+  <app-siluetas-fondo [siluetas]="siluetas" />
+
+  <div class="contenedor relative">
+    <header class="encabezado-seccion" data-acequia="pasos">
+      <h2 id="titulo-pasos" appRevelar>Empezar es muy <span class="resalte-recortado text-turquesa">sencillo</span></h2>
+      <p appRevelar="100">Sin compromisos: primero conócenos, luego decides.</p>
+    </header>
+
+    <!--
+      Cada paso es una carta dentro de su sobre. Con mouse, el sobre cubre la carta y al pasar encima
+      se desliza hacia abajo; en pantallas táctiles la carta ya se muestra abierta.
+    -->
+    <ol class="mb-[clamp(36px,4vw,52px)] grid gap-[clamp(14px,1.6vw,22px)] md:grid-cols-3">
+      @for (paso of pasos; track paso.titulo; let i = $index) {
+        <li class="carta" tabindex="0" [attr.aria-labelledby]="'paso-' + i" [appRevelar]="i * retrasoPorPasoMs">
+          <div class="hoja">
+            <span class="text-sm font-bold text-tinta-suave">Paso {{ i + 1 }}</span>
+            <h3 class="text-[1.375rem]" [id]="'paso-' + i">{{ paso.titulo }}</h3>
+            <p class="leading-8 text-tinta-suave">
+              @for (palabra of paso.palabras; track $index) {
+                <span class="palabra" [style.--orden]="$index">{{ palabra }}</span>{{ ' ' }}
+              }
+            </p>
+          </div>
+
+          <div class="sobre" [ngClass]="paso.tema" aria-hidden="true">
+            <svg class="solapa" viewBox="0 0 100 40" preserveAspectRatio="none">
+              <path d="M0 0h100L56 36a9 9 0 0 1-12 0Z" />
+            </svg>
+            <span class="sello">{{ i + 1 }}</span>
+            <span class="font-display text-[1.5rem] leading-tight font-extrabold text-balance">{{ paso.titulo }}</span>
+            <span class="pista">Abrir <app-icono nombre="flecha" /></span>
+          </div>
+        </li>
+      }
+    </ol>
+
+    <a class="boton" [href]="whatsapp" target="_blank" rel="noopener" appRevelar="200">
+      <app-icono nombre="whatsapp" /> Dar el primer paso
+    </a>
+  </div>
+</section>

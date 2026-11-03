@@ -1,0 +1,10 @@
+@for (silueta of recorridos(); track $index) {
+  <app-silueta
+    class="absolute"
+    [ngClass]="silueta.clases"
+    [forma]="silueta.forma"
+    [style.--deambular-duracion.s]="silueta.duracionS"
+    [style.--deambular-retraso.s]="silueta.retrasoS"
+    [style.--deambular-x.px]="silueta.distanciaX"
+    [style.--deambular-y.px]="silueta.distanciaY" />
+}

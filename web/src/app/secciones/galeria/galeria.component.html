@@ -1,0 +1,145 @@
+<section id="galeria" class="seccion franja-oscura bg-morado" aria-labelledby="titulo-galeria">
+  <app-divisor class="text-morado" forma="ola" [invertido]="true" />
+  <app-fondo-dibujado class="text-white/60" [curva]="true" [garabatos]="garabatos" />
+  <app-siluetas-fondo [siluetas]="siluetas" />
+
+  <div class="contenedor relative">
+    <div class="mb-[clamp(28px,4vw,44px)] grid items-end gap-6 lg:grid-cols-12">
+      <header class="encabezado-seccion mb-0 lg:col-span-7" data-acequia="galeria">
+        <h2 id="titulo-galeria" appRevelar>Así se vive <span class="resalte-recortado text-mostaza">Mi Paraíso</span></h2>
+        <p appRevelar="100">
+          Nuestros espacios, talleres y veranos en fotos. Elige una categoría para ver cada servicio.
+        </p>
+      </header>
+
+      <!-- Filtros: cada categoría con su ícono y su color; la elegida se llena de ese color. -->
+      <div class="flex flex-wrap gap-2 lg:col-span-5 lg:justify-end" role="group" aria-label="Filtrar fotos por categoría" appRevelar="160">
+        @for (filtro of filtros; track filtro.id) {
+          <button
+            type="button"
+            class="filtro"
+            [attr.data-categoria]="filtro.id"
+            [attr.aria-pressed]="filtroActivo() === filtro.id"
+            (click)="elegirFiltro(filtro.id)">
+            <span class="filtro-icono"><app-icono [nombre]="filtro.icono" /></span>
+            {{ filtro.nombre }}
+            <span class="filtro-cantidad">{{ cantidadEn(filtro.id) }}</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    <p class="sr-only" aria-live="polite">{{ anuncioDeFiltro() }}</p>
+
+    <ul class="grid grid-flow-dense auto-rows-[clamp(140px,19vw,240px)] grid-cols-2 gap-surco md:grid-cols-3 lg:grid-cols-4">
+      @for (foto of fotos; track foto.id; let i = $index) {
+        @let categoria = filtroDe(foto.categoria);
+        <li
+          class="foto-celda"
+          appInclinar
+          [class.row-span-2]="foto.alto > foto.ancho"
+          [class.md:col-span-2]="foto.destacada"
+          [class.md:row-span-2]="foto.destacada"
+          [hidden]="!coincideConFiltro(foto)"
+          [style.view-transition-name]="'foto-' + foto.id">
+          <button
+            type="button"
+            class="foto-galeria parcela group/foto block size-full cursor-zoom-in bg-morado-oscuro"
+            [attr.aria-label]="'Ampliar foto: ' + foto.titulo"
+            [appRevelar]="retrasoDeAparicion(i)"
+            (click)="abrirVisor(foto)">
+            <img
+              class="transition-transform duration-700 ease-suave group-hover/foto:scale-[1.06]"
+              [appAdaptable]="foto.src"
+              [attr.sizes]="foto.destacada ? anchoFotoDestacada : anchoFoto"
+              [alt]="foto.alt"
+              [width]="foto.ancho"
+              [height]="foto.alto"
+              loading="lazy"
+              decoding="async" />
+            <span class="foto-brillo" aria-hidden="true"></span>
+            <span class="foto-pie">
+              <span class="text-[0.95rem] leading-tight font-semibold text-white sm:text-base">{{ foto.titulo }}</span>
+              <span class="foto-etiqueta" [attr.data-categoria]="foto.categoria">
+                <app-icono [nombre]="categoria.icono" /> {{ categoria.nombre }}
+              </span>
+            </span>
+            <span class="foto-ampliar" aria-hidden="true"><app-icono nombre="ampliar" /></span>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <p class="mt-6 text-sm text-(--texto-secundario)">Las fotografías son referenciales.</p>
+  </div>
+
+  <!--
+    Visor: diálogo nativo (atrapa el foco, se cierra con Esc y devuelve el foco a la foto).
+    La foto entra deslizándose desde el lado hacia el que se avanza; abajo, miniaturas para saltar.
+  -->
+  <dialog
+    #visor
+    class="visor"
+    aria-label="Foto ampliada"
+    [style.--direccion]="direccionEnVisor()"
+    (click)="alHacerClicEnVisor($event)"
+    (keydown)="alPresionarTeclaEnVisor($event)">
+    <div class="visor-contenido">
+      @for (foto of fotoEnVisorComoLista(); track foto.id) {
+        <figure
+          class="visor-foto"
+          (pointerdown)="alEmpezarDeslizamiento($event)"
+          (pointerup)="alTerminarDeslizamiento($event)"
+          (pointercancel)="alTerminarDeslizamiento($event)">
+          <img
+            class="visor-imagen"
+            draggable="false"
+            [src]="foto.src"
+            [alt]="foto.alt"
+            [width]="foto.ancho"
+            [height]="foto.alto"
+            loading="lazy"
+            decoding="async" />
+          <figcaption class="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-1 text-white">
+            <span>
+              <strong class="font-semibold">{{ foto.titulo }}</strong>
+              <span class="text-white/70"> · {{ nombreDeCategoria(foto.categoria) }}</span>
+            </span>
+            <span class="text-sm text-white/70 tabular-nums">{{ posicionEnVisor() }} / {{ fotosVisibles().length }}</span>
+          </figcaption>
+        </figure>
+      }
+
+      <div class="visor-miniaturas" role="group" aria-label="Elegir otra foto">
+        @for (foto of fotosVisibles(); track foto.id) {
+          <button
+            type="button"
+            class="visor-miniatura"
+            [attr.aria-current]="esFotoEnVisor(foto) ? 'true' : null"
+            [attr.aria-label]="'Ver ' + foto.titulo"
+            (click)="verFoto(foto)">
+            <img
+              [appAdaptable]="foto.src"
+              sizes="64px"
+              alt=""
+              [width]="foto.ancho"
+              [height]="foto.alto"
+              loading="lazy"
+              decoding="async" />
+          </button>
+        }
+      </div>
+      <p class="text-sm text-white/60 sm:hidden">Desliza la foto para ver la siguiente</p>
+    </div>
+
+    <button type="button" class="visor-boton top-4 right-4" aria-label="Cerrar" (click)="cerrarVisor()">
+      <app-icono nombre="cerrar" />
+    </button>
+    <button type="button" class="visor-boton visor-flecha left-3" aria-label="Foto anterior" (click)="verAnterior()">
+      <app-icono nombre="anterior" />
+    </button>
+    <button type="button" class="visor-boton visor-flecha right-3" aria-label="Foto siguiente" (click)="verSiguiente()">
+      <app-icono nombre="siguiente" />
+    </button>
+  </dialog>
+</section>

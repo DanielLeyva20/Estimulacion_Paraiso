@@ -1,0 +1,63 @@
+# Despliegue en Render como sitio estático: gratis, con HTTPS y CDN, siempre encendido (no "duerme").
+# Render lee este archivo al crear el servicio con New → Blueprint, conectado al repositorio de GitHub.
+# Las rutas van completas desde la raíz del repositorio (la aplicación vive en la carpeta web/).
+services:
+  - type: web
+    name: mi-paraiso
+    runtime: static
+    buildCommand: cd web && npm ci && npm run build
+    staticPublishPath: web/dist/mi-paraiso/browser
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Vacío = modo "no indexar" (la versión de revisión no aparece en Google). Al tener el dominio
+      # definitivo, poner aquí su URL completa (https://...) y volver a desplegar.
+      - key: SITIO_URL
+        value: ""
+
+    headers:
+      # Seguridad. Los scripts los protege la CSP con hashes que Angular escribe en index.html; aquí
+      # se suma el resto (sin default-src ni script-src, para no contradecir esa política).
+      - path: /*
+        name: Content-Security-Policy
+        value: "object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data: https://tile.openstreetmap.org; media-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; upgrade-insecure-requests"
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=31536000
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+      # Caché: lo que lleva hash en el nombre no cambia nunca; fotos y video, 30 días.
+      - path: /*.js
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /*.css
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /media/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      - path: /img/*
+        name: Cache-Control
+        value: public, max-age=2592000
+      - path: /video/*
+        name: Cache-Control
+        value: public, max-age=2592000
+
+    routes:
+      # Cualquier dirección que no exista muestra la página 404 de Mi Paraíso. (Render solo aplica la
+      # regla cuando no hay un archivo en esa ruta, así que la página y sus recursos no se ven afectados.)
+      - type: rewrite
+        source: /*
+        destination: /404.html

@@ -1,0 +1,47 @@
+<!-- Todas las figuras comparten un lienzo de 100 × 100. -->
+<svg viewBox="0 0 100 100" fill="currentColor" stroke="currentColor" stroke-width="5" stroke-linejoin="round">
+  @switch (forma()) {
+    @case ('estrella') {
+      <path d="M50 8l12.4 25.2 27.8 4-20.1 19.6 4.7 27.7L50 71.4 25.2 84.5l4.7-27.7L9.8 37.2l27.8-4Z" />
+    }
+    @case ('nube') {
+      <path d="M28 76a17 17 0 0 1-3-33.7A24 24 0 0 1 70 34a20 20 0 0 1 4 42Z" />
+    }
+    @case ('corazon') {
+      <path d="M50 86S12 62 12 36a19 19 0 0 1 38-5 19 19 0 0 1 38 5c0 26-38 50-38 50Z" />
+    }
+    @case ('luna') {
+      <path d="M60 10a40 40 0 1 0 30 62A33 33 0 0 1 60 10Z" />
+    }
+    @case ('sonaja') {
+      <circle cx="50" cy="32" r="22" />
+      <rect x="45" y="52" width="10" height="30" rx="5" stroke="none" />
+      <circle cx="50" cy="86" r="8" />
+    }
+    @case ('patito') {
+      <circle cx="62" cy="32" r="15" />
+      <path d="M78 30l14 4-14 6Z" />
+      <path d="M12 58c0-8 9-13 20-11 7 1 13 4 21 4h22c7 0 11 5 9 12-3 13-17 21-36 21S12 74 12 58Z" />
+    }
+    @case ('nota') {
+      <circle cx="34" cy="74" r="13" />
+      <rect x="42" y="14" width="8" height="60" rx="3" stroke="none" />
+      <path d="M46 14c14 2 26 9 26 24-6-7-15-9-26-9Z" />
+    }
+    @case ('bloque') {
+      <path fill-rule="evenodd" d="M24 14h52a10 10 0 0 1 10 10v52a10 10 0 0 1-10 10H24a10 10 0 0 1-10-10V24a10 10 0 0 1 10-10Zm10 20v32h32V34Z" />
+    }
+    @case ('osito') {
+      <circle cx="26" cy="30" r="12" />
+      <circle cx="74" cy="30" r="12" />
+      <circle cx="50" cy="56" r="30" />
+    }
+    @case ('pregunta') {
+      <path d="M33 34a17 17 0 1 1 25 15c-6 3-8 7-8 13v3" fill="none" stroke-width="13" stroke-linecap="round" />
+      <circle cx="50" cy="85" r="8" />
+    }
+    @case ('lapiz') {
+      <path d="M18 88l5-19 47-47a9 9 0 0 1 13 0 9 9 0 0 1 0 13L36 82Z" />
+    }
+  }
+</svg>

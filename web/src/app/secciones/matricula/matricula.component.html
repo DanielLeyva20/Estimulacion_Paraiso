@@ -1,0 +1,377 @@
+<section id="matricula" class="seccion franja-oscura bg-azul" aria-labelledby="titulo-matricula">
+  <app-divisor class="text-azul" forma="olas" />
+  <app-fondo-dibujado class="text-white/70" [vuelo]="true" [garabatos]="garabatos" />
+  <app-siluetas-fondo class="text-white/12" [siluetas]="siluetas" />
+
+  <div class="contenedor relative grid items-start gap-[clamp(40px,5vw,80px)] lg:grid-cols-12">
+    <!--
+      Columna informativa. En móvil se "disuelve" (contents) para ordenar sus partes alrededor de la ficha:
+      título, ficha, foto y luego los pasos y el contacto.
+    -->
+    <div class="grid gap-9 max-lg:contents lg:sticky lg:top-24 lg:col-span-5">
+      <header class="encabezado-seccion mb-0 max-lg:order-1" data-acequia="matricula">
+        <h2 id="titulo-matricula" appRevelar>Matricula a <span class="resalte-recortado text-mostaza">tu niño</span></h2>
+        <p appRevelar="100">
+          Completa la ficha y separa su vacante en Mi Paraíso. Con estos datos preparamos todo para recibirlo.
+        </p>
+      </header>
+
+      <div class="relative max-lg:order-3 max-lg:max-w-136" appRevelar="140">
+        <figure class="lamina [--lamina-giro:2deg]">
+          <img
+            class="aspect-5/4 object-[50%_30%]"
+            appAdaptable="img/matricula-mochila.webp"
+            sizes="(min-width: 64rem) 480px, 92vw"
+            alt="Niña pequeña con sombrero y mochila, lista para su primer día"
+            width="1000"
+            height="1420"
+            loading="lazy"
+            decoding="async" />
+        </figure>
+        <span
+          class="absolute right-3 -bottom-4 flex items-center gap-2 rounded-full bg-mostaza px-4 py-2.5 font-semibold text-tinta shadow-etiqueta sm:-right-4">
+          <app-icono nombre="calendario" /> Su primer día empieza aquí
+        </span>
+      </div>
+
+      <div class="max-lg:order-4" appRevelar="160">
+        <h3 class="text-[1.25rem]">Después de enviarla</h3>
+        <ol class="mt-4 grid gap-4">
+          @for (paso of pasos; track paso; let i = $index) {
+            <li class="flex items-start gap-3.5">
+              <span
+                class="grid size-8 flex-none place-items-center rounded-full bg-mostaza font-display font-extrabold text-tinta"
+                aria-hidden="true">
+                {{ i + 1 }}
+              </span>
+              <span class="pt-0.5 text-(--texto-secundario)">{{ paso }}</span>
+            </li>
+          }
+        </ol>
+      </div>
+
+      <dl class="flex flex-wrap gap-x-10 gap-y-5 border-t-2 border-white/20 pt-6 max-lg:order-5" appRevelar="220">
+        <div>
+          <dt class="flex items-center gap-1.5 text-sm font-semibold text-(--texto-secundario)">
+            <app-icono nombre="telefono" /> WhatsApp
+          </dt>
+          <dd class="mt-1 text-[1.125rem] font-semibold">
+            <a class="hover:underline" [href]="telefonoEnlace">{{ telefono }}</a>
+          </dd>
+        </div>
+        <div>
+          <dt class="flex items-center gap-1.5 text-sm font-semibold text-(--texto-secundario)">
+            <app-icono nombre="ubicacion" /> Ubicación
+          </dt>
+          <dd class="mt-1 text-[1.125rem] font-semibold">{{ ubicacion }} · Lima, Perú</dd>
+        </div>
+      </dl>
+
+      <a class="enlace-flecha justify-self-start text-white max-lg:order-6" [href]="whatsapp" target="_blank" rel="noopener" appRevelar="260">
+        <span>¿Prefieres conversar primero? Escríbenos</span> <app-icono nombre="flecha" />
+      </a>
+    </div>
+
+    <!-- Ficha de matrícula -->
+    <div
+      class="rounded-campo bg-blanco p-[clamp(20px,4vw,48px)] text-tinta shadow-tarjeta [--texto-secundario:var(--color-tinta-suave)] max-lg:order-2 lg:col-span-7"
+      appRevelar="120">
+      @if (enlaceEnviado(); as enlace) {
+        <div class="grid animate-aparecer justify-items-start gap-5 py-4" role="status">
+          <span class="grid size-14 place-items-center rounded-full bg-turquesa [--icono-tamano:28px]">
+            <app-icono nombre="check" />
+          </span>
+          <h3>¡Listo! Tu ficha está en WhatsApp</h3>
+          <p class="max-w-136 text-tinta-suave">
+            Abrimos WhatsApp con los datos de tu niño. Solo presiona <strong class="text-tinta">enviar</strong> y te
+            responderemos para confirmar la matrícula.
+          </p>
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a class="boton" [href]="enlace" target="_blank" rel="noopener">
+              <app-icono nombre="whatsapp" /> ¿No se abrió? Abrir WhatsApp
+            </a>
+            <button type="button" class="enlace-flecha cursor-pointer" (click)="volverAlFormulario()">
+              Corregir algún dato
+            </button>
+          </div>
+        </div>
+      } @else {
+        <form class="grid gap-8" [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+          <!-- Indicador de avance: cada tramo se llena con los datos válidos de su grupo y lleva a él al tocarlo. -->
+          <div class="grid gap-4">
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3>Ficha de matrícula</h3>
+              <span class="text-sm font-semibold text-tinta-suave tabular-nums" aria-live="polite">
+                {{ camposListos() }} de {{ totalDeCampos }} datos listos
+              </span>
+            </div>
+            <ol class="grid grid-cols-3 gap-2">
+              @for (grupo of grupos; track grupo.id) {
+                @let avance = avanceDe(grupo);
+                <li>
+                  <button
+                    type="button"
+                    class="grid w-full cursor-pointer gap-2 rounded-lg text-left transition-[scale] duration-150 ease-suave active:scale-[0.97]"
+                    (click)="irAGrupo(grupo)">
+                    <span class="block h-2 overflow-hidden rounded-full bg-tinta/10" aria-hidden="true">
+                      <span
+                        class="block h-full origin-left rounded-full transition-[scale] duration-300 ease-suave"
+                        [class]="grupo.color"
+                        [style.scale]="avance + ' 1'"></span>
+                    </span>
+                    <span class="flex items-center gap-1.5 text-sm leading-tight font-semibold">
+                      @if (avance === 1) {
+                        <span class="inline-flex animate-aparecer text-turquesa-oscuro [--icono-tamano:16px]">
+                          <app-icono nombre="check" />
+                        </span>
+                      }
+                      {{ grupo.nombre }}
+                      <span class="sr-only">{{ avance === 1 ? '(completo)' : '(pendiente)' }}</span>
+                    </span>
+                  </button>
+                </li>
+              }
+            </ol>
+            <p class="text-[0.95rem] text-tinta-suave">Todos los datos son obligatorios, salvo el programa.</p>
+          </div>
+
+          <!-- Datos del niño o niña -->
+          <fieldset class="grid gap-5 sm:grid-cols-2">
+            <legend class="mb-4 flex items-center gap-2.5 font-display text-[1.15rem] font-extrabold">
+              <span class="indicador-grupo bg-turquesa" aria-hidden="true">
+                @if (grupoCompleto('nino')) {
+                  <span class="inline-flex animate-aparecer"><app-icono nombre="check" /></span>
+                }
+              </span>
+              Tu niño o niña
+            </legend>
+
+            @let errorNombreNino = errorDe('nombreNino');
+            <div class="campo sm:col-span-2">
+              <label class="campo-etiqueta" [for]="idDe('nombreNino')">Nombre completo</label>
+              <input
+                class="campo-control"
+                type="text"
+                formControlName="nombreNino"
+                autocomplete="off"
+                placeholder="Nombres y apellidos"
+                [id]="idDe('nombreNino')"
+                [attr.maxlength]="largoMaximoNombre"
+                [attr.aria-invalid]="!!errorNombreNino"
+                [attr.aria-describedby]="errorNombreNino ? idDe('nombreNino') + '-error' : null" />
+              @if (errorNombreNino) {
+                <p class="campo-error animate-aparecer" [id]="idDe('nombreNino') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorNombreNino }}
+                </p>
+              }
+            </div>
+
+            @let errorFecha = errorDe('fechaNacimiento');
+            <div class="campo">
+              <label class="campo-etiqueta" [for]="idDe('fechaNacimiento')">Fecha de nacimiento</label>
+              <input
+                class="campo-control"
+                type="date"
+                formControlName="fechaNacimiento"
+                [id]="idDe('fechaNacimiento')"
+                [min]="fechaMinima"
+                [max]="fechaMaxima"
+                [attr.aria-invalid]="!!errorFecha"
+                [attr.aria-describedby]="errorFecha ? idDe('fechaNacimiento') + '-error' : null" />
+              @if (errorFecha) {
+                <p class="campo-error animate-aparecer" [id]="idDe('fechaNacimiento') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorFecha }}
+                </p>
+              }
+            </div>
+
+            <div class="campo">
+              <span class="campo-etiqueta" id="matricula-edad-etiqueta">Edad</span>
+              <output
+                class="campo-control grid items-center bg-crema-2 shadow-none"
+                aria-labelledby="matricula-edad-etiqueta"
+                [class]="edad() ? 'font-semibold' : 'text-tinta-suave'"
+                [attr.for]="idDe('fechaNacimiento')">
+                {{ edad() || 'Elige la fecha' }}
+              </output>
+              <p class="campo-ayuda">Se calcula sola con la fecha de nacimiento.</p>
+            </div>
+
+            <div class="campo sm:col-span-2">
+              <label class="campo-etiqueta" [for]="idDe('programa')">Programa de interés</label>
+              <select class="campo-control cursor-pointer" formControlName="programa" [id]="idDe('programa')">
+                @for (programa of programas; track programa) {
+                  <option [value]="programa">{{ programa }}</option>
+                }
+              </select>
+            </div>
+          </fieldset>
+
+          <!-- Datos del apoderado -->
+          <fieldset class="grid gap-5 sm:grid-cols-2">
+            <legend class="mb-4 flex items-center gap-2.5 font-display text-[1.15rem] font-extrabold">
+              <span class="indicador-grupo bg-coral" aria-hidden="true">
+                @if (grupoCompleto('apoderado')) {
+                  <span class="inline-flex animate-aparecer"><app-icono nombre="check" /></span>
+                }
+              </span>
+              Madre, padre o apoderado
+            </legend>
+
+            @let errorApoderado = errorDe('nombreApoderado');
+            <div class="campo sm:col-span-2">
+              <label class="campo-etiqueta" [for]="idDe('nombreApoderado')">Nombre completo</label>
+              <input
+                class="campo-control"
+                type="text"
+                formControlName="nombreApoderado"
+                autocomplete="name"
+                placeholder="Nombres y apellidos"
+                [id]="idDe('nombreApoderado')"
+                [attr.maxlength]="largoMaximoNombre"
+                [attr.aria-invalid]="!!errorApoderado"
+                [attr.aria-describedby]="errorApoderado ? idDe('nombreApoderado') + '-error' : null" />
+              @if (errorApoderado) {
+                <p class="campo-error animate-aparecer" [id]="idDe('nombreApoderado') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorApoderado }}
+                </p>
+              }
+            </div>
+
+            @let errorDni = errorDe('dni');
+            <div class="campo">
+              <label class="campo-etiqueta" [for]="idDe('dni')">DNI</label>
+              <input
+                class="campo-control tabular-nums tracking-[0.06em]"
+                type="text"
+                inputmode="numeric"
+                formControlName="dni"
+                autocomplete="off"
+                placeholder="8 dígitos"
+                [id]="idDe('dni')"
+                [attr.maxlength]="digitosDni"
+                [attr.aria-invalid]="!!errorDni"
+                [attr.aria-describedby]="errorDni ? idDe('dni') + '-error' : null"
+                (input)="dejarSoloDigitos('dni')" />
+              @if (errorDni) {
+                <p class="campo-error animate-aparecer" [id]="idDe('dni') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorDni }}
+                </p>
+              }
+            </div>
+
+            @let errorCelular = errorDe('celular');
+            <div class="campo">
+              <label class="campo-etiqueta" [for]="idDe('celular')">Celular</label>
+              <div class="relative">
+                <span
+                  class="pointer-events-none absolute inset-y-0 left-4 grid place-items-center font-semibold text-tinta-suave"
+                  aria-hidden="true">
+                  +51
+                </span>
+                <input
+                  class="campo-control pl-14 tabular-nums tracking-[0.04em]"
+                  type="tel"
+                  inputmode="numeric"
+                  formControlName="celular"
+                  autocomplete="tel-national"
+                  placeholder="9XX XXX XXX"
+                  [id]="idDe('celular')"
+                  [attr.maxlength]="digitosCelular"
+                  [attr.aria-invalid]="!!errorCelular"
+                  [attr.aria-describedby]="errorCelular ? idDe('celular') + '-error' : null"
+                  (input)="dejarSoloDigitos('celular')" />
+              </div>
+              @if (errorCelular) {
+                <p class="campo-error animate-aparecer" [id]="idDe('celular') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorCelular }}
+                </p>
+              }
+            </div>
+          </fieldset>
+
+          <!-- Dirección -->
+          <fieldset class="grid gap-5 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+            <legend class="mb-4 flex items-center gap-2.5 font-display text-[1.15rem] font-extrabold">
+              <span class="indicador-grupo bg-mostaza" aria-hidden="true">
+                @if (grupoCompleto('direccion')) {
+                  <span class="inline-flex animate-aparecer"><app-icono nombre="check" /></span>
+                }
+              </span>
+              ¿Dónde viven?
+            </legend>
+
+            @let errorDistrito = errorDe('distrito');
+            <div class="campo">
+              <label class="campo-etiqueta" [for]="idDe('distrito')">Distrito (Cañete)</label>
+              <select
+                class="campo-control cursor-pointer"
+                formControlName="distrito"
+                [id]="idDe('distrito')"
+                [attr.aria-invalid]="!!errorDistrito"
+                [attr.aria-describedby]="errorDistrito ? idDe('distrito') + '-error' : null">
+                <option value="" disabled>Elige tu distrito</option>
+                @for (distrito of distritos; track distrito) {
+                  <option [value]="distrito">{{ distrito }}</option>
+                }
+              </select>
+              @if (errorDistrito) {
+                <p class="campo-error animate-aparecer" [id]="idDe('distrito') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorDistrito }}
+                </p>
+              }
+            </div>
+
+            @let errorDireccion = errorDe('direccion');
+            <div class="campo">
+              <label class="campo-etiqueta" [for]="idDe('direccion')">Dirección</label>
+              <input
+                class="campo-control"
+                type="text"
+                formControlName="direccion"
+                autocomplete="street-address"
+                placeholder="Calle, número y referencia"
+                [id]="idDe('direccion')"
+                [attr.maxlength]="largoMaximoDireccion"
+                [attr.aria-invalid]="!!errorDireccion"
+                [attr.aria-describedby]="errorDireccion ? idDe('direccion') + '-error' : null" />
+              @if (errorDireccion) {
+                <p class="campo-error animate-aparecer" [id]="idDe('direccion') + '-error'">
+                  <app-icono nombre="alerta" /> {{ errorDireccion }}
+                </p>
+              }
+            </div>
+          </fieldset>
+
+          @let errorAutorizacion = errorDe('autorizacion');
+          <div class="campo">
+            <label class="flex cursor-pointer items-start gap-3 text-[0.98rem] leading-[1.45]">
+              <input
+                class="mt-0.5 size-5 flex-none cursor-pointer accent-turquesa-oscuro"
+                type="checkbox"
+                formControlName="autorizacion"
+                [id]="idDe('autorizacion')"
+                [attr.aria-invalid]="!!errorAutorizacion"
+                [attr.aria-describedby]="errorAutorizacion ? idDe('autorizacion') + '-error' : null" />
+              <span>Autorizo a Mi Paraíso a usar estos datos solo para contactarme sobre la matrícula de mi niño.</span>
+            </label>
+            @if (errorAutorizacion) {
+              <p class="campo-error animate-aparecer" [id]="idDe('autorizacion') + '-error'">
+                <app-icono nombre="alerta" /> {{ errorAutorizacion }}
+              </p>
+            }
+          </div>
+
+          <div class="grid gap-3 border-t-2 border-tinta/10 pt-6">
+            <button class="boton w-full min-h-15 text-[1.125rem]" type="submit">
+              <app-icono nombre="whatsapp" /> Enviar matrícula por WhatsApp
+            </button>
+            <p class="text-center text-sm text-tinta-suave">
+              Se abrirá WhatsApp con tus datos listos; solo tienes que presionar enviar.
+            </p>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+<section id="confianza" class="seccion franja-clara bg-turquesa" aria-labelledby="titulo-confianza">
+  <app-divisor class="text-turquesa" forma="olas" [invertido]="true" />
+  <app-fondo-dibujado class="text-white/85" [garabatos]="garabatos" [vuelo]="true" [curva]="true" [halo]="true" />
+  <app-siluetas-fondo class="text-white/65" [siluetas]="nubes" />
+
+  <div class="contenedor relative grid items-start gap-[clamp(40px,5vw,80px)] lg:grid-cols-12">
+    <div class="lg:sticky lg:top-28 lg:col-span-5">
+      <header class="encabezado-seccion relative" data-acequia="confianza">
+        <app-garabato class="-top-7 right-[6%] w-11 rotate-12 text-mostaza md:w-14" forma="rayitos" />
+        <h2 id="titulo-confianza" class="titulo-confianza" appRevelar>
+          <span class="block">Tu tranquilidad</span>
+          <span class="resalte-recortado text-mostaza">también</span>&ngsp;<span class="con-subrayado">
+            importa
+            <app-garabato class="subrayado-titulo text-mostaza" forma="subrayado" />
+          </span>
+        </h2>
+        <p appRevelar="100">
+          Dejar a tu hijo en otras manos es una decisión grande. Por eso trabajamos con cercanía, transparencia y las
+          puertas abiertas para ti.
+        </p>
+      </header>
+
+      <figure class="relative mx-2 sm:mx-6" appRevelar="160">
+        <app-garabato class="-top-6 -left-8 w-11 -rotate-12 text-mostaza md:w-14" forma="rayitos" />
+        <div class="lamina">
+          <img
+            class="aspect-4/3"
+            appAdaptable="img/sala-amplia.webp"
+            sizes="(min-width: 64rem) 480px, 92vw"
+            alt="Sala amplia y luminosa con mesitas, cojines y estantes con juguetes"
+            width="1400"
+            height="933"
+            loading="lazy"
+            decoding="async" />
+        </div>
+        <app-garabato class="-bottom-8 -left-6 w-24 md:w-28" forma="estrella-sonriente" />
+      </figure>
+    </div>
+
+    <!-- Compromisos: tarjetas blancas que se inclinan hacia el mouse y animan su ícono. -->
+    <ul class="grid gap-[clamp(12px,1.4vw,18px)] self-center sm:grid-cols-2 lg:col-span-7">
+      @for (compromiso of compromisos; track compromiso.titulo; let i = $index) {
+        <li class="h-full" [appRevelar]="i * retrasoPorCompromisoMs">
+          <article class="compromiso" appInclinar [attr.data-tono]="compromiso.tono">
+            <span class="compromiso-icono"><app-icono [nombre]="compromiso.icono" /></span>
+            <div class="grid content-start gap-1.5">
+              <h3 class="text-[1.15rem] leading-tight">{{ compromiso.titulo }}</h3>
+              <p class="text-[0.95rem] leading-snug text-tinta-suave">{{ compromiso.texto }}</p>
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

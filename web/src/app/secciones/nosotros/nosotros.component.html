@@ -1,0 +1,106 @@
+<section id="nosotros" class="seccion bg-cielo" aria-labelledby="titulo-nosotros">
+  <app-divisor class="text-cielo" forma="colinas" />
+  <app-fondo-dibujado class="text-azul/40" [curva]="true" [garabatos]="garabatos" />
+  <app-siluetas-fondo [siluetas]="siluetas" />
+
+  <div class="contenedor relative grid gap-[clamp(56px,7vw,96px)]">
+    <!-- La nube: foto, presentación y trayectoria de la directora. -->
+    <div class="nube" appRevelar>
+      @for (copo of copos; track $index) {
+        <span
+          class="nube-copo"
+          [attr.data-borde]="copo.borde"
+          [style.--posicion]="copo.posicion"
+          [style.--tamano]="copo.tamano"
+          aria-hidden="true"></span>
+      }
+
+      <div class="relative grid items-center gap-[clamp(36px,5vw,72px)] lg:grid-cols-12">
+        <figure class="relative lg:col-span-6">
+          <div class="lamina [--lamina-giro:-2deg]">
+            <img
+              class="aspect-[16/10] object-[50%_40%]"
+              [appAdaptable]="foto.src"
+              sizes="(min-width: 64rem) 560px, 92vw"
+              [alt]="foto.alt"
+              [width]="foto.ancho"
+              [height]="foto.alto"
+              loading="lazy"
+              decoding="async" />
+            <figcaption class="px-1 pt-2.5 pb-0.5 text-center text-[0.9rem] font-semibold text-tinta-suave">
+              {{ directora }} junto a su equipo de profesoras
+            </figcaption>
+          </div>
+
+          <div #sello class="sello-anios" role="img" [attr.aria-label]="aniosDelColegio + ' años del colegio ' + colegio">
+            <span class="font-display text-[clamp(2rem,4vw,2.75rem)] leading-none font-extrabold tabular-nums" aria-hidden="true">
+              {{ aniosMostrados() }}
+            </span>
+            <span class="text-[0.8rem] leading-tight font-bold" aria-hidden="true">años<br />educando</span>
+          </div>
+        </figure>
+
+        <div class="grid justify-items-start gap-5 lg:col-span-6">
+          <header class="grid gap-4" data-acequia="nosotros">
+            <h2 id="titulo-nosotros" appRevelar>Conoce a quien está <span class="con-subrayado text-morado">a cargo<app-garabato class="subrayado-titulo text-mostaza" forma="subrayado" /></span></h2>
+            <p class="max-w-xl text-[1.125em] text-tinta-suave" appRevelar="80">
+              Dejar a tu hijo en otras manos es más fácil cuando sabes quién está detrás.
+            </p>
+          </header>
+
+          <div class="grid gap-1.5" appRevelar="140">
+            <h3 class="text-subtitulo">{{ directora }}</h3>
+            <span class="w-fit rounded-full bg-turquesa/20 px-3 py-1 text-sm font-semibold text-turquesa-oscuro">
+              Directora de Mi Paraíso
+            </span>
+          </div>
+
+          <p class="max-w-xl leading-relaxed" appRevelar="200">
+            Es profesora y directora del colegio <strong class="font-semibold">{{ colegio }}</strong>, de inicial y
+            primaria, que ya cumple <strong class="font-semibold">{{ aniosDelColegio }} años</strong> educando a niños y
+            acompañando a sus familias. Esa misma experiencia, cariño y exigencia son los que hoy cuidan a los más
+            pequeños en Mi Paraíso.
+          </p>
+
+          <ul class="grid w-full gap-2 sm:grid-cols-3" appRevelar="260">
+            @for (dato of datos; track dato.valor) {
+              <li class="grid content-start gap-1.5 rounded-parcela-sm bg-cielo/60 p-3.5">
+                <span class="grid size-9 place-items-center rounded-full bg-blanco text-azul-oscuro [--icono-tamano:19px]">
+                  <app-icono [nombre]="dato.icono" />
+                </span>
+                <strong class="font-display text-[1.05rem] leading-tight font-extrabold">{{ dato.valor }}</strong>
+                <span class="text-sm leading-snug text-tinta-suave">{{ dato.texto }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Por qué confiar: sobre el cielo, fuera de la nube. -->
+    <div class="grid gap-[clamp(28px,4vw,44px)]">
+      <ul class="grid gap-[clamp(20px,3vw,32px)] md:grid-cols-3">
+        @for (razon of razones; track razon.titulo; let i = $index) {
+          <li class="razon" [appRevelar]="i * retrasoPorRazonMs">
+            <span class="grid size-12 place-items-center rounded-2xl bg-blanco text-coral-oscuro shadow-etiqueta [--icono-tamano:24px]">
+              <app-icono [nombre]="razon.icono" />
+            </span>
+            <h3 class="text-[1.2rem]">{{ razon.titulo }}</h3>
+            <p class="text-tinta-suave">{{ razon.texto }}</p>
+          </li>
+        }
+      </ul>
+
+      <div
+        class="flex flex-col items-start justify-between gap-5 rounded-parcela bg-azul p-[clamp(22px,3vw,36px)] text-white md:flex-row md:items-center"
+        appRevelar>
+        <p class="font-display text-[clamp(1.25rem,2vw,1.6rem)] leading-snug font-extrabold text-balance">
+          Nuestro compromiso: que cada familia sienta que deja a su hijo en las mejores manos.
+        </p>
+        <a class="boton boton-blanco flex-none" [href]="whatsapp" target="_blank" rel="noopener">
+          <app-icono nombre="whatsapp" /> Agenda una visita y conócela
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+<section id="preguntas" class="seccion bg-crema-2" aria-labelledby="titulo-preguntas">
+  <app-divisor class="text-crema-2" forma="curva" />
+  <app-siluetas-fondo [siluetas]="siluetas" />
+
+  <div class="contenedor relative grid items-start gap-[clamp(32px,5vw,80px)] lg:grid-cols-12">
+    <div class="grid gap-[clamp(28px,4vw,44px)] lg:sticky lg:top-28 lg:col-span-5">
+      <header class="encabezado-seccion mb-0 justify-items-start" data-acequia="preguntas">
+        <h2 id="titulo-preguntas" appRevelar>Preguntas de <span class="con-subrayado text-coral-oscuro">mamás y papás<app-garabato class="subrayado-titulo text-turquesa" forma="subrayado" /></span></h2>
+        <p appRevelar="100">¿Tienes otra duda? Escríbenos, te respondemos con gusto.</p>
+        <a class="enlace-flecha" [href]="whatsapp" target="_blank" rel="noopener" appRevelar="160">
+          Hacer una pregunta <app-icono nombre="flecha" />
+        </a>
+      </header>
+
+      <!-- Foto con una parcela de color desplazada detrás, para darle profundidad sin sombras. -->
+      <div class="relative mr-4 mb-4 max-lg:max-w-136" appRevelar="200">
+        <div class="surcos absolute inset-0 translate-x-4 translate-y-4 rounded-parcela bg-coral" aria-hidden="true"></div>
+        <figure class="parcela relative aspect-16/10 bg-coral-oscuro">
+          <img
+            appAdaptable="img/lectura-familia.webp"
+            sizes="(min-width: 64rem) 520px, 92vw"
+            alt="Mamá y niño leyendo un cuento recostados en el piso"
+            width="1400"
+            height="788"
+            loading="lazy"
+            decoding="async" />
+          <figcaption class="etiqueta absolute bottom-3.5 left-3.5">Aquí también aprendes tú</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="grid gap-2.5 lg:col-span-6 lg:col-start-7" appRevelar="120">
+      @for (item of preguntas; track item.pregunta; let primera = $first) {
+        <details
+          class="group rounded-parcela-sm bg-blanco transition-shadow duration-400 ease-suave open:shadow-sombra"
+          [open]="primera">
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-parcela-sm px-5.5 py-5 text-[1.0625rem] leading-[1.4] font-semibold [&::-webkit-details-marker]:hidden">
+            <span>{{ item.pregunta }}</span>
+            <span
+              class="grid size-8 flex-none place-items-center rounded-full bg-coral text-tinta transition-transform duration-300 ease-suave group-open:rotate-45">
+              <app-icono nombre="mas" />
+            </span>
+          </summary>
+          <p class="max-w-[60ch] px-5.5 pb-5.5 text-tinta-suave group-open:animate-abrir">{{ item.respuesta }}</p>
+        </details>
+      }
+    </div>
+  </div>
+</section>

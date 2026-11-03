@@ -1,0 +1,71 @@
+:host {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  z-index: 30;
+  display: none;
+  translate: 0 -50%;
+  transition:
+    translate 0.4s var(--ease-suave),
+    opacity 0.3s ease-out;
+}
+/* Con el pie a la vista (que ya tiene las redes), la barra se retira hacia la izquierda. */
+:host(.escondida) {
+  opacity: 0;
+  translate: -100% -50%;
+  pointer-events: none;
+}
+@media (min-width: 90rem) {
+  :host {
+    display: block;
+  }
+}
+
+/*
+ * Pestaña blanca pegada al borde, con una cinta de colores a la izquierda. Entra deslizándose
+ * cuando ya se retiró la pantalla de carga.
+ */
+.barra {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 14px 8px 12px 12px;
+  border-radius: 0 28px 28px 0;
+  background-color: rgb(255 253 248 / 0.92);
+  box-shadow: var(--shadow-tarjeta);
+  backdrop-filter: blur(10px);
+  animation: entrar 0.7s var(--ease-suave) 1.8s backwards;
+}
+.barra::before {
+  content: '';
+  position: absolute;
+  inset: 14px auto 14px 0;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(var(--color-coral), var(--color-mostaza), var(--color-turquesa), var(--color-morado));
+}
+
+.barra-titulo {
+  color: var(--color-tinta-suave);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    translate: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra {
+    animation: none;
+  }
+}
